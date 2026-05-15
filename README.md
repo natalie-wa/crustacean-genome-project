@@ -1,1 +1,1 @@
-# crustacean-genome-project
+# crustacean-genomes-project
