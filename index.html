@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crustacean Genome Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* =====================
+       VARIABLES & RESET
+    ===================== */
+    :root {
+      --cyan:    #2BB5E8;
+      --black:   #0e1520;
+      --white:   #f5f4f0;
+      --grey:    #4a5260;
+      --border:  rgba(14, 21, 32, 0.1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+
+    /* =====================
+       NAVIGATION
+    ===================== */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .nav-links a {
+      color: var(--grey);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    .nav-cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--cyan);
+      color: var(--white);
+      border: none;
+      padding: 9px 22px;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.85;
+    }
+
+
+    /* =====================
+       HERO
+    ===================== */
+    .hero {
+      padding: 80px 48px 64px;
+      border-bottom: 1px solid var(--border);
+      max-width: 760px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 88px;
+      line-height: 0.92;
+      letter-spacing: 0.03em;
+      color: var(--black);
+      margin-bottom: 28px;
+    }
+
+    .hero-title .accent {
+      color: var(--cyan);
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--grey);
+      max-width: 540px;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .btn-primary {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--cyan);
+      color: var(--white);
+      border: none;
+      padding: 13px 30px;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.85;
+    }
+
+    .btn-ghost {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      color: var(--cyan);
+    }
+
+
+    /* =====================
+       STATS BAR
+    ===================== */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat {
+      padding: 28px 48px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 44px;
+      letter-spacing: 0.03em;
+      color: var(--cyan);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-top: 6px;
+    }
+
+
+    /* =====================
+       PILLARS SECTION
+    ===================== */
+    .section {
+      padding: 64px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      margin-bottom: 40px;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .pillar-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .pillar-bar {
+      width: 28px;
+      height: 2px;
+      background: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .pillar-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.06em;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+
+    .pillar-body {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--grey);
+    }
+
+
+    /* =====================
+       COMMUNITY BAND
+    ===================== */
+    .community {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comm-cell {
+      padding: 48px;
+      border-right: 1px solid var(--border);
+    }
+
+    .comm-cell:last-child {
+      border-right: none;
+    }
+
+    .comm-cell.accent {
+      background: var(--cyan);
+    }
+
+    .comm-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      letter-spacing: 0.05em;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+
+    .comm-cell.accent .comm-title {
+      color: var(--white);
+    }
+
+    .comm-body {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--grey);
+    }
+
+    .comm-cell.accent .comm-body {
+      color: rgba(245, 244, 240, 0.8);
+    }
+
+    .btn-dark {
+      display: inline-block;
+      margin-top: 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--black);
+      color: var(--cyan);
+      border: none;
+      padding: 11px 24px;
+      cursor: pointer;
+    }
+
+    .btn-dark:hover {
+      opacity: 0.85;
+    }
+
+    .comm-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      color: var(--grey);
+    }
+
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--grey);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-links a {
+      color: var(--grey);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--cyan);
+    }
+
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 768px) {
+      nav        { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .hero      { padding: 48px 20px 40px; }
+      .hero-title { font-size: 56px; }
+      .stats     { grid-template-columns: repeat(2, 1fr); }
+      .stat      { padding: 20px; }
+      .section   { padding: 40px 20px; }
+      .pillars   { grid-template-columns: 1fr; gap: 28px; }
+      .community { grid-template-columns: 1fr; }
+      .comm-cell { padding: 32px 20px; border-right: none; border-bottom: 1px solid var(--border); }
+      footer     { padding: 20px; flex-direction: column; gap: 14px; text-align: center; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- =====================
+       NAVIGATION
+  ===================== -->
+  <nav>
+    <a href="/" class="nav-logo"><span>Crustacean</span> Genome Project</a>
+    <ul class="nav-links">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Species</a></li>
+      <li><a href="#">Data</a></li>
+      <li><a href="#">Publications</a></li>
+      <li><a href="#">Team</a></li>
+      <li><a href="#">Community</a></li>
+    </ul>
+    <button class="nav-cta">Join the Project</button>
+  </nav>
+
+
+  <!-- =====================
+       HERO
+  ===================== -->
+  <section class="hero">
+    <p class="hero-eyebrow">A global open-science initiative</p>
+    <h1 class="hero-title">
+      Genomes<br>
+      <span class="accent">Across</span><br>
+      Crustacea
+    </h1>
+    <p class="hero-desc">
+      [Project mission statement — a sentence or two about the CGP's goals,
+      scope, and why this matters for biodiversity science.]
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary">Explore the Data</button>
+      <button class="btn-ghost">Learn More →</button>
+    </div>
+  </section>
+
+
+  <!-- =====================
+       STATS
+  ===================== -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">—</div>
+      <div class="stat-label">Target Species</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">—</div>
+      <div class="stat-label">Genomes Assembled</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">—</div>
+      <div class="stat-label">Contributors</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">—</div>
+      <div class="stat-label">Partner Institutions</div>
+    </div>
+  </div>
+
+
+  <!-- =====================
+       PILLARS
+  ===================== -->
+  <section class="section">
+    <p class="section-label">Why it matters</p>
+    <h2 class="section-title">Three Pillars of the Project</h2>
+    <div class="pillars">
+
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-bar"></div>
+        <div class="pillar-title">Strategic Taxonomic Sampling</div>
+        <div class="pillar-body">Crustacean genomic resources remain concentrated in a narrow slice of diversity. We prioritise phylogenetically deliberate sampling across all major lineages — targeting the gaps that limit comparative inference, not just the species that attract commercial attention.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-bar"></div>
+        <div class="pillar-title">Quality & Open Data Standards</div>
+        <div class="pillar-body">Genomic resources are only as useful as their accessibility and integrity. We are committed to the highest achievable assembly quality for each taxon — paired with open deposition, full metadata, voucher linkage, and reproducible workflows — so every resource we generate is built to last and built to be reused.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-bar"></div>
+        <div class="pillar-title">Community & Coordination</div>
+        <div class="pillar-body">No single discipline can close this gap alone. We unite systematists, ecologists, genomicists, aquaculture researchers, and conservation biologists under a shared framework — shifting crustacean genomics from a collection of isolated efforts into a coherent, cumulative comparative infrastructure.</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================
+       COMMUNITY
+  ===================== -->
+  <div class="community">
+    <div class="comm-cell accent">
+      <div class="comm-title">Get Involved</div>
+      <div class="comm-body">[A short invitation to join the project — researchers, institutions, and community contributors welcome.]</div>
+      <button class="btn-dark">Join the Network →</button>
+    </div>
+    <div class="comm-cell">
+      <div class="comm-title">Who We Are</div>
+      <div class="comm-body">[Brief description of the community — taxonomists, genomicists, ecologists, aquaculture researchers, and more working across institutions worldwide.]</div>
+      <div class="comm-tags">
+        <span class="tag">Systematics</span>
+        <span class="tag">Genomics</span>
+        <span class="tag">Ecology</span>
+        <span class="tag">Aquaculture</span>
+        <span class="tag">Conservation</span>
+        <span class="tag">Bioinformatics</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =====================
+       FOOTER
+  ===================== -->
+  <footer>
+    <span class="footer-logo">Crustacean Genome Project</span>
+    <ul class="footer-links">
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Data Policy</a></li>
+      <li><a href="#">License</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
