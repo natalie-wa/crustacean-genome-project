@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crustacean Genome Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f4f0; --bg2: #ece9e2; --text: #0e1520;
+      --text2: #4a5260; --text3: #8a909c; --cyan: #2BB5E8;
+      --border: rgba(14,21,32,0.1); --border2: rgba(14,21,32,0.06);
+      --card: #ffffff; --nav-bg: rgba(245,244,240,0.95); --sil-opacity: 0.12;
+    }
+    [data-theme="dark"] {
+      --bg: #0a0f1a; --bg2: #0d1320; --text: #f0f4f8;
+      --text2: #8fa0b4; --text3: #4a5a6e; --border: rgba(43,181,232,0.15);
+      --border2: rgba(43,181,232,0.07); --card: #0d1320;
+      --nav-bg: rgba(10,15,26,0.95); --sil-opacity: 0.18;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); transition: background 0.35s, color 0.35s; }
+
+    /* NAV */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px; border-bottom: 0.5px solid var(--border);
+      background: var(--nav-bg); position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1; gap: 1px; text-decoration: none; }
+    .nav-logo .w1 { font-family: 'Bebas Neue', sans-serif; font-size: 10px; letter-spacing: 0.4em; color: var(--cyan); }
+    .nav-logo .w2 { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 0.12em; color: var(--text); transition: color 0.35s; }
+    .nav-links { display: flex; gap: 28px; font-size: 12px; letter-spacing: 0.08em; color: var(--text2); text-transform: uppercase; list-style: none; }
+    .nav-links a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+
+    /* THEME TOGGLE */
+    .toggle-btn { width: 44px; height: 24px; border-radius: 12px; background: var(--bg2); border: 0.5px solid var(--border); cursor: pointer; position: relative; transition: background 0.35s; flex-shrink: 0; }
+    .toggle-knob { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--cyan); transition: transform 0.3s; }
+    [data-theme="dark"] .toggle-knob { transform: translateX(20px); }
+    .toggle-icon { position: absolute; top: 50%; font-size: 10px; transform: translateY(-50%); transition: opacity 0.3s; line-height: 1; }
+    .toggle-sun { left: 5px; opacity: 1; }
+    .toggle-moon { right: 4px; opacity: 0; }
+    [data-theme="dark"] .toggle-sun { opacity: 0; }
+    [data-theme="dark"] .toggle-moon { opacity: 1; }
+
+    .nav-cta { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--cyan); color: var(--cyan); padding: 7px 18px; cursor: pointer; background: transparent; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--cyan); color: var(--bg); }
+
+    /* HERO */
+    .hero { display: grid; grid-template-columns: 1fr 320px; padding: 64px 48px 52px; gap: 24px; align-items: center; border-bottom: 0.5px solid var(--border); overflow: hidden; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--cyan); margin-bottom: 14px; }
+    .hero-title { font-family: 'Bebas Neue', sans-serif; line-height: 0.9; letter-spacing: 0.04em; color: var(--text); margin-bottom: 22px; transition: color 0.35s; }
+    .hero-title .line-sm { font-size: 40px; color: var(--text2); display: block; }
+    .hero-title .line-lg { font-size: 84px; color: var(--cyan); display: block; }
+    .hero-title .line-md { font-size: 62px; display: block; }
+    .hero-desc { font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--text2); max-width: 440px; margin-bottom: 30px; transition: color 0.35s; }
+    .hero-actions { display: flex; align-items: center; gap: 20px; }
+    .btn-primary { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; background: var(--cyan); color: var(--bg); border: none; padding: 12px 28px; cursor: pointer; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text2); background: none; border: none; cursor: pointer; transition: color 0.2s; }
+    .btn-ghost:hover { color: var(--cyan); }
+
+    /* SILHOUETTE ROTATOR */
+    .sil-wrap { display: flex; align-items: center; justify-content: center; position: relative; height: 230px; }
+    .sil-item { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.9s ease; }
+    .sil-item.active { opacity: 1; }
+    .sil-item svg { width: 270px; height: 210px; fill: var(--cyan); opacity: var(--sil-opacity); transition: opacity 0.35s; }
+    .sil-dots { display: flex; gap: 7px; justify-content: center; margin-top: 16px; }
+    .sil-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); cursor: pointer; transition: background 0.3s; border: none; padding: 0; }
+    .sil-dot.active { background: var(--cyan); }
+
+    /* DNA DIVIDER */
+    .dna-bar { height: 2px; margin: 0 48px; opacity: 0.4; background: repeating-linear-gradient(90deg, var(--cyan) 0px, var(--cyan) 22px, transparent 22px, transparent 32px, var(--cyan) 32px, var(--cyan) 46px, transparent 46px, transparent 62px, var(--cyan) 62px, var(--cyan) 70px, transparent 70px, transparent 86px); }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 0.5px solid var(--border); }
+    .stat { padding: 26px 48px; border-right: 0.5px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 0.04em; color: var(--cyan); line-height: 1; }
+    .stat-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text3); margin-top: 5px; transition: color 0.35s; }
+
+    /* SECTIONS */
+    .section { padding: 56px 48px; border-bottom: 0.5px solid var(--border); }
+    .section-eyebrow { font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 0.05em; color: var(--text); margin-bottom: 28px; transition: color 0.35s; }
+
+    /* PILLARS */
+    .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .pillar { background: var(--card); padding: 30px 26px; transition: background 0.35s; position: relative; overflow: hidden; }
+    .pillar-num { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 0.3em; color: var(--cyan); margin-bottom: 14px; }
+    .pillar-bar { width: 24px; height: 2px; background: var(--cyan); margin-bottom: 14px; }
+    .pillar-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.07em; color: var(--text); margin-bottom: 10px; transition: color 0.35s; }
+    .pillar-body { font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--text2); transition: color 0.35s; }
+    .pillar-ghost { position: absolute; bottom: -10px; right: 6px; font-family: 'Bebas Neue', sans-serif; font-size: 90px; color: var(--border2); line-height: 1; pointer-events: none; user-select: none; }
+
+    /* COMMUNITY */
+    .community { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-bottom: 0.5px solid var(--border); }
+    .comm-cell { background: var(--card); padding: 36px 48px; transition: background 0.35s; }
+    .comm-cell.accent { background: var(--cyan); }
+    .comm-cell.accent .comm-title { color: #0a0f1a; }
+    .comm-cell.accent .comm-body { color: rgba(10,15,26,0.65); }
+    .btn-dark { background: #0a0f1a; color: var(--cyan); font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border: none; padding: 11px 24px; cursor: pointer; margin-top: 20px; display: inline-block; transition: opacity 0.2s; }
+    .btn-dark:hover { opacity: 0.8; }
+    .comm-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.06em; color: var(--text); margin-bottom: 12px; transition: color 0.35s; }
+    .comm-body { font-size: 14px; font-weight: 300; line-height: 1.75; color: var(--text2); transition: color 0.35s; }
+    .comm-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .tag { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 12px; border: 0.5px solid var(--border); color: var(--text3); background: var(--bg2); transition: all 0.35s; }
+
+    /* FOOTER */
+    footer { display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; border-top: 0.5px solid var(--border); }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 0.22em; color: var(--text3); }
+    .footer-links { display: flex; gap: 24px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); }
+    .footer-links a { color: inherit; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cyan); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 40px 20px 32px; }
+      .sil-wrap { display: none; }
+      .hero-title .line-lg { font-size: 60px; }
+      .hero-title .line-md { font-size: 44px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat { padding: 20px 20px; }
+      .section { padding: 36px 20px; }
+      .pillars { grid-template-columns: 1fr; }
+      .community { grid-template-columns: 1fr; }
+      .comm-cell { padding: 28px 20px; }
+      .dna-bar { margin: 0 20px; }
+      footer { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<div id="root" data-theme="light">
+
+  <nav>
+    <a href="#" class="nav-logo">
+      <span class="w1">Crustacean</span>
+      <span class="w2">Genome Project</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Species</a></li>
+      <li><a href="#">Data</a></li>
+      <li><a href="#">Publications</a></li>
+      <li><a href="#">Team</a></li>
+      <li><a href="#">Community</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="toggle-btn" id="themeToggle" aria-label="Toggle light/dark mode">
+        <div class="toggle-knob"></div>
+        <span class="toggle-icon toggle-sun" aria-hidden="true">☀</span>
+        <span class="toggle-icon toggle-moon" aria-hidden="true">☾</span>
+      </button>
+      <button class="nav-cta">Join the Project</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <p class="hero-eyebrow">A global open-science initiative</p>
+      <h1 class="hero-title">
+        <span class="line-sm">Genomes</span>
+        <span class="line-lg">Across</span>
+        <span class="line-md">Crustacea</span>
+      </h1>
+      <p class="hero-desc">[Project mission statement — a sentence or two about the CGP's goals, scope, and why this matters for biodiversity science.]</p>
+      <div class="hero-actions">
+        <button class="btn-primary">Explore the Data</button>
+        <button class="btn-ghost">Learn More →</button>
+      </div>
+    </div>
+    <div>
+      <div class="sil-wrap" aria-hidden="true">
+        <!-- CRAB -->
+        <div class="sil-item active">
+          <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="130" cy="108" rx="50" ry="36"/>
+            <ellipse cx="96" cy="90" rx="13" ry="10"/>
+            <ellipse cx="164" cy="90" rx="13" ry="10"/>
+            <line x1="83" y1="82" x2="52" y2="58" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="46" cy="53" rx="10" ry="7" transform="rotate(-20 46 53)"/>
+            <line x1="77" y1="95" x2="38" y2="88" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <line x1="78" y1="110" x2="36" y2="112" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <line x1="84" y1="124" x2="50" y2="138" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <line x1="92" y1="136" x2="70" y2="155" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <line x1="177" y1="82" x2="208" y2="58" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="214" cy="53" rx="10" ry="7" transform="rotate(20 214 53)"/>
+            <line x1="183" y1="95" x2="222" y2="88" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <line x1="182" y1="110" x2="224" y2="112" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <line x1="176" y1="124" x2="210" y2="138" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <line x1="168" y1="136" x2="190" y2="155" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <line x1="118" y1="74" x2="110" y2="56" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="142" y1="74" x2="150" y2="56" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <!-- SHRIMP -->
+        <div class="sil-item">
+          <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 80 60 Q 100 40 140 50 Q 180 60 190 90 Q 200 120 175 140 Q 155 155 130 150 Q 100 145 85 125 Q 70 105 80 60 Z"/>
+            <line x1="140" y1="50" x2="170" y2="20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="150" y1="54" x2="190" y2="30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="85" y1="80" x2="55" y2="68" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="83" y1="95" x2="50" y2="88" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="85" y1="110" x2="52" y2="108" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="90" y1="124" x2="58" y2="128" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 125 150 Q 115 165 100 175 Q 85 185 75 178" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <path d="M 125 150 Q 140 168 148 178" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <!-- ISOPOD -->
+        <div class="sil-item">
+          <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="130" cy="100" rx="56" ry="34"/>
+            <line x1="130" y1="74" x2="130" y2="126" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+            <line x1="104" y1="76" x2="104" y2="124" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <line x1="156" y1="76" x2="156" y2="124" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+            <line x1="86" y1="84" x2="50" y2="74" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="84" y1="94" x2="46" y2="90" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="84" y1="104" x2="46" y2="106" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="86" y1="114" x2="50" y2="122" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="174" y1="84" x2="210" y2="74" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="176" y1="94" x2="214" y2="90" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="176" y1="104" x2="214" y2="106" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="174" y1="114" x2="210" y2="122" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <line x1="116" y1="68" x2="108" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="130" y1="66" x2="130" y2="48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="144" y1="68" x2="152" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M 74 120 Q 60 132 50 145" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <path d="M 186 120 Q 200 132 210 145" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <div class="sil-dots" aria-hidden="true">
+        <button class="sil-dot active" data-idx="0" aria-label="Crab"></button>
+        <button class="sil-dot" data-idx="1" aria-label="Shrimp"></button>
+        <button class="sil-dot" data-idx="2" aria-label="Isopod"></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="dna-bar" aria-hidden="true"></div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num">—</div><div class="stat-label">Target Species</div></div>
+    <div class="stat"><div class="stat-num">—</div><div class="stat-label">Genomes Assembled</div></div>
+    <div class="stat"><div class="stat-num">—</div><div class="stat-label">Contributors</div></div>
+    <div class="stat"><div class="stat-num">—</div><div class="stat-label">Partner Institutions</div></div>
+  </div>
+
+  <section class="section">
+    <p class="section-eyebrow">Why it matters</p>
+    <h2 class="section-title">Three Pillars of the Project</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-bar"></div>
+        <div class="pillar-title">[Pillar One Title]</div>
+        <div class="pillar-body">[Description of the first strategic pillar — placeholder text to be replaced with project content.]</div>
+        <div class="pillar-ghost" aria-hidden="true">01</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-bar"></div>
+        <div class="pillar-title">[Pillar Two Title]</div>
+        <div class="pillar-body">[Description of the second strategic pillar — placeholder text to be replaced with project content.]</div>
+        <div class="pillar-ghost" aria-hidden="true">02</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-bar"></div>
+        <div class="pillar-title">[Pillar Three Title]</div>
+        <div class="pillar-body">[Description of the third strategic pillar — placeholder text to be replaced with project content.]</div>
+        <div class="pillar-ghost" aria-hidden="true">03</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="community">
+    <div class="comm-cell accent">
+      <div class="comm-title">Get Involved</div>
+      <div class="comm-body">[A short invitation to join the project — researchers, institutions, and community contributors welcome.]</div>
+      <button class="btn-dark">Join the Network →</button>
+    </div>
+    <div class="comm-cell">
+      <div class="comm-title">Who We Are</div>
+      <div class="comm-body">[Brief description of the community — taxonomists, genomicists, ecologists, aquaculture researchers, and more working across institutions worldwide.]</div>
+      <div class="comm-tags">
+        <span class="tag">Systematics</span>
+        <span class="tag">Genomics</span>
+        <span class="tag">Ecology</span>
+        <span class="tag">Aquaculture</span>
+        <span class="tag">Conservation</span>
+        <span class="tag">Bioinformatics</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-logo">Crustacean Genome Project</span>
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">Contact</a>
+      <a href="#">Data Policy</a>
+      <a href="#">License</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Theme toggle
+  const root = document.getElementById('root');
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+
+  // Silhouette rotator
+  const sils = document.querySelectorAll('.sil-item');
+  const dots = document.querySelectorAll('.sil-dot');
+  let cur = 0;
+  function showSil(idx) {
+    sils[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur = idx;
+    sils[cur].classList.add('active');
+    dots[cur].classList.add('active');
+  }
+  dots.forEach(d => d.addEventListener('click', () => showSil(+d.dataset.idx)));
+  setInterval(() => showSil((cur + 1) % sils.length), 3200);
+</script>
+</body>
+</html>
