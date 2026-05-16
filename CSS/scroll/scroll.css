@@ -44,13 +44,13 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  background: linear-gradient(
-    to right,
-    #f7f6f2 0%,
-    rgba(247, 246, 242, 0.95) 10%,
-    rgba(247, 246, 242, 0.55) 22%,
-    rgba(247, 246, 242, 0) 40%
-  );
+background: linear-gradient(
+  to right,
+  #f5f4f0 0%,
+  rgba(245, 244, 240, 0.95) 10%,
+  rgba(245, 244, 240, 0.55) 22%,
+  rgba(245, 244, 240, 0) 40%
+);
 }
 
 @keyframes crustaceanScroll {
