@@ -14,10 +14,10 @@
 
 .crustacean-carousel {
   position: absolute;
-  top: 120px;
+  top: 95px;
   right: 0;
-  width: 68%;
-  height: 360px;
+  width: 72%;
+  height: 430px;
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
@@ -28,13 +28,13 @@
   align-items: center;
   width: max-content;
   height: 100%;
-  animation: crustaceanScroll 45s linear infinite;
+  animation: crustaceanScroll 55s linear infinite;
 }
 
 .crustacean-track img {
-  height: 230px;
+  height: 330px;
   width: auto;
-  margin-right: 6rem;
+  margin-right: 8rem;
   opacity: 0.95;
 }
 
@@ -44,13 +44,14 @@
   inset: 0;
   z-index: 2;
   pointer-events: none;
-background: linear-gradient(
-  to right,
-  #f5f4f0 0%,
-  rgba(245, 244, 240, 0.95) 10%,
-  rgba(245, 244, 240, 0.55) 22%,
-  rgba(245, 244, 240, 0) 40%
-);
+  background: linear-gradient(
+    to right,
+    #f5f4f0 0%,
+    rgba(245, 244, 240, 0.98) 12%,
+    rgba(245, 244, 240, 0.75) 24%,
+    rgba(245, 244, 240, 0.25) 38%,
+    rgba(245, 244, 240, 0) 52%
+  );
 }
 
 @keyframes crustaceanScroll {
@@ -66,5 +67,18 @@ background: linear-gradient(
 @media (prefers-reduced-motion: reduce) {
   .crustacean-track {
     animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .crustacean-carousel {
+    opacity: 0.12;
+    width: 100%;
+    top: 160px;
+    height: 300px;
+  }
+
+  .crustacean-track img {
+    height: 220px;
   }
 }
