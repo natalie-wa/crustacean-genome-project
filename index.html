@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/scroll/scroll.css">
 
   <style>
 
@@ -104,9 +105,19 @@ nav {
        HERO
     ===================== */
     .hero {
+      position: relative;
+      overflow: hidden;
       padding: 80px 48px 64px;
       border-bottom: 1px solid var(--border);
-      max-width: 760px;
+      min-height: 560px;
+    }
+    .hero-eyebrow,
+    .hero-title,
+    .hero-desc,
+    .hero-actions {
+      position: relative;
+      z-index: 3;
+      max-width: 760px; 
     }
 
     .hero-eyebrow {
