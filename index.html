@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Crustacean Genomes Project</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="CSS/scroll/scroll.css">
 
   <style>
-
     /* =====================
        VARIABLES & RESET
     ===================== */
@@ -36,37 +37,36 @@
       line-height: 1.6;
     }
 
-
     /* =====================
        NAVIGATION
     ===================== */
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 48px;
-  border-bottom: 1px solid var(--border);
-  background: var(--black);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--black);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-.nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.12em;
-  color: var(--white);
-  text-decoration: none;
-}
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
 
-.nav-logo span {
-  color: var(--cyan);
-}
+    .nav-logo .nav-logo-the {
+      color: var(--white);
+    }
 
-.nav-logo-the {
-  color: var(--black);
-}
+    .nav-logo .nav-logo-crustacean {
+      color: var(--cyan);
+    }
 
     .nav-links {
       display: flex;
@@ -79,7 +79,7 @@ nav {
     }
 
     .nav-links a {
-      color: var(--grey);
+      color: rgba(245, 244, 240, 0.7);
       text-decoration: none;
     }
 
@@ -104,7 +104,6 @@ nav {
       opacity: 0.85;
     }
 
-
     /* =====================
        HERO
     ===================== */
@@ -115,13 +114,14 @@ nav {
       border-bottom: 1px solid var(--border);
       min-height: 560px;
     }
+
     .hero-eyebrow,
     .hero-title,
     .hero-desc,
     .hero-actions {
       position: relative;
       z-index: 3;
-      max-width: 760px; 
+      max-width: 760px;
     }
 
     .hero-eyebrow {
@@ -193,7 +193,6 @@ nav {
       color: var(--cyan);
     }
 
-
     /* =====================
        STATS BAR
     ===================== */
@@ -227,7 +226,6 @@ nav {
       color: var(--grey);
       margin-top: 6px;
     }
-
 
     /* =====================
        PILLARS SECTION
@@ -289,7 +287,6 @@ nav {
       color: var(--grey);
     }
 
-
     /* =====================
        COMMUNITY BAND
     ===================== */
@@ -332,7 +329,7 @@ nav {
     }
 
     .comm-cell.accent .comm-body {
-      color: rgba(245, 244, 240, 0.8);
+      color: rgba(245, 244, 240, 0.85);
     }
 
     .btn-dark {
@@ -370,7 +367,6 @@ nav {
       color: var(--grey);
     }
 
-
     /* =====================
        FOOTER
     ===================== */
@@ -406,77 +402,115 @@ nav {
       color: var(--cyan);
     }
 
-
     /* =====================
        RESPONSIVE
     ===================== */
     @media (max-width: 768px) {
-      nav        { padding: 16px 20px; }
-      .nav-links { display: none; }
-      .hero      { padding: 48px 20px 40px; }
-      .hero-title { font-size: 56px; }
-      .stats     { grid-template-columns: repeat(2, 1fr); }
-      .stat      { padding: 20px; }
-      .section   { padding: 40px 20px; }
-      .pillars   { grid-template-columns: 1fr; gap: 28px; }
-      .community { grid-template-columns: 1fr; }
-      .comm-cell { padding: 32px 20px; border-right: none; border-bottom: 1px solid var(--border); }
-      footer     { padding: 20px; flex-direction: column; gap: 14px; text-align: center; }
-    }
+      nav {
+        padding: 16px 20px;
+      }
 
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 48px 20px 40px;
+      }
+
+      .hero-title {
+        font-size: 56px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat {
+        padding: 20px;
+      }
+
+      .section {
+        padding: 40px 20px;
+      }
+
+      .pillars {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .community {
+        grid-template-columns: 1fr;
+      }
+
+      .comm-cell {
+        padding: 32px 20px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      footer {
+        padding: 20px;
+        flex-direction: column;
+        gap: 14px;
+        text-align: center;
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <!-- =====================
        NAVIGATION
   ===================== -->
-<nav>
-  <a href="/" class="nav-logo">
-    <span class="nav-logo-the">The</span> <span>Crustacean</span> Genomes Project
-  </a>
+  <nav>
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-the">The</span>
+      <span class="nav-logo-crustacean">Crustacean</span>
+      Genomes Project
+    </a>
 
-  <ul class="nav-links">
-    <li><a href="#" style="color: rgba(245,244,240,0.7);">About</a></li>
-    <li><a href="#" style="color: rgba(245,244,240,0.7);">Species</a></li>
-    <li><a href="#" style="color: rgba(245,244,240,0.7);">Data</a></li>
-    <li><a href="#" style="color: rgba(245,244,240,0.7);">Publications</a></li>
-    <li><a href="#" style="color: rgba(245,244,240,0.7);">Team</a></li>
-    <li><a href="#" style="color: rgba(245,244,240,0.7);">Community</a></li>
-  </ul>
+    <ul class="nav-links">
+      <li><a href="#">About</a></li>
+      <li><a href="#">Species</a></li>
+      <li><a href="#">Data</a></li>
+      <li><a href="#">Publications</a></li>
+      <li><a href="#">Team</a></li>
+      <li><a href="#">Community</a></li>
+    </ul>
 
-  <button class="nav-cta">Join the Project</button>
-</nav>
-
+    <button class="nav-cta">Join the Project</button>
+  </nav>
 
   <!-- =====================
        HERO
   ===================== -->
-<section class="hero">
-  <p class="hero-eyebrow">A global open-science initiative</p>
+  <section class="hero">
+    <p class="hero-eyebrow">A global open-science initiative</p>
 
-  <h1 class="hero-title">
-    <span style="font-size: 0.4em;">The</span><br>
-    <span class="accent">Crustacean</span><br>
-    Genomes<br>
-    Project
-  </h1>
+    <h1 class="hero-title">
+      <span style="font-size: 0.4em;">The</span><br>
+      <span class="accent">Crustacean</span><br>
+      Genomes<br>
+      Project
+    </h1>
 
-  <p class="hero-desc">
-    Filling a critical gap in biodiversity genomics through coordinated crustacean genome sequencing.
-  </p>
+    <p class="hero-desc">
+      Filling a critical gap in biodiversity genomics through coordinated crustacean genome sequencing.
+    </p>
 
-  <div class="hero-actions">
-    <button class="btn-primary">Learn More</button>
-  </div>
-
-  <div class="crustacean-carousel" aria-hidden="true">
-    <div class="crustacean-track">
-      <img src="images/crustacean-scroll-strip.png" alt="">
-      <img src="images/crustacean-scroll-strip.png" alt="">
+    <div class="hero-actions">
+      <button class="btn-primary">Learn More</button>
     </div>
-  </div>
-</section>
+
+    <div class="crustacean-carousel" aria-hidden="true">
+      <div class="crustacean-track">
+        <img src="images/crustacean-scroll-strip.png" alt="">
+        <img src="images/crustacean-scroll-strip.png" alt="">
+      </div>
+    </div>
+  </section>
 
   <!-- =====================
        STATS
@@ -486,20 +520,22 @@ nav {
       <div class="stat-num">—</div>
       <div class="stat-label">Target Species</div>
     </div>
+
     <div class="stat">
       <div class="stat-num">—</div>
       <div class="stat-label">Genomes Assembled</div>
     </div>
+
     <div class="stat">
       <div class="stat-num">—</div>
       <div class="stat-label">Contributors</div>
     </div>
+
     <div class="stat">
       <div class="stat-num">—</div>
       <div class="stat-label">Partner Institutions</div>
     </div>
   </div>
-
 
   <!-- =====================
        PILLARS
@@ -507,32 +543,36 @@ nav {
   <section class="section">
     <p class="section-label">Why it matters</p>
     <h2 class="section-title">Project Priorities</h2>
-    <div class="pillars">
 
+    <div class="pillars">
       <div class="pillar">
         <div class="pillar-num">01</div>
         <div class="pillar-bar"></div>
         <div class="pillar-title">Strategic Taxonomic Sampling</div>
-        <div class="pillar-body">Prioritizing crustacean lineages that fill major gaps in biodiversity genomics, with attention to phylogenetic breadth, ecological diversity, conservation relevance, and applied importance.</div>
+        <div class="pillar-body">
+          Prioritizing crustacean lineages that fill major gaps in biodiversity genomics, with attention to phylogenetic breadth, ecological diversity, conservation relevance, and applied importance.
+        </div>
       </div>
 
       <div class="pillar">
         <div class="pillar-num">02</div>
         <div class="pillar-bar"></div>
         <div class="pillar-title">Quality & Open Data Standards</div>
-        <div class="pillar-body">Promoting high-quality genome assemblies, transparent metadata, voucher-linked specimens, and openly accessible data resources that can be reused across research communities.</div>
+        <div class="pillar-body">
+          Promoting high-quality genome assemblies, transparent metadata, voucher-linked specimens, and openly accessible data resources that can be reused across research communities.
+        </div>
       </div>
 
       <div class="pillar">
         <div class="pillar-num">03</div>
         <div class="pillar-bar"></div>
         <div class="pillar-title">Community Coordination</div>
-        <div class="pillar-body">Connecting taxonomists, genomicists, bioinformaticians, ecologists, fisheries and aquaculture researchers, and conservation practitioners to make crustacean genomics more collaborative, representative, and useful.n</div>
+        <div class="pillar-body">
+          Connecting taxonomists, genomicists, bioinformaticians, ecologists, fisheries and aquaculture researchers, and conservation practitioners to make crustacean genomics more collaborative, representative, and useful.
+        </div>
       </div>
-
     </div>
   </section>
-
 
   <!-- =====================
        COMMUNITY
@@ -540,29 +580,37 @@ nav {
   <div class="community">
     <div class="comm-cell accent">
       <div class="comm-title">Get Involved</div>
-      <div class="comm-body">Join a growing community working to expand high-quality, open genomic resources across Crustacea. We welcome contributors interested in species selection, specimens, genome assembly, annotation, data standards, comparative analyses, outreach, and future funding opportunities.</div>
+      <div class="comm-body">
+        Join a growing community working to expand high-quality, open genomic resources across Crustacea. We welcome contributors interested in species selection, specimens, genome assembly, annotation, data standards, comparative analyses, outreach, and future funding opportunities.
+      </div>
       <button class="btn-dark">Join the Project →</button>
     </div>
+
     <div class="comm-cell">
       <div class="comm-title">Who We Are</div>
-      <div class="comm-body">CrustGP brings together researchers across systematics, genomics, ecology, evolution, conservation, fisheries, aquaculture, and bioinformatics. The project is designed to connect existing expertise, coordinate priorities, and make crustacean genome resources more representative, reusable, and accessible.</div>
+      <div class="comm-body">
+        CrustGP brings together researchers across systematics, genomics, ecology, evolution, conservation, fisheries, aquaculture, and bioinformatics. The project is designed to connect existing expertise, coordinate priorities, and make crustacean genome resources more representative, reusable, and accessible.
+      </div>
+
       <div class="comm-tags">
         <span class="tag">Systematics</span>
         <span class="tag">Genomics</span>
         <span class="tag">Ecology</span>
+        <span class="tag">Evolution</span>
         <span class="tag">Aquaculture</span>
         <span class="tag">Conservation</span>
         <span class="tag">Bioinformatics</span>
+        <span class="tag">Open Data</span>
       </div>
     </div>
   </div>
-
 
   <!-- =====================
        FOOTER
   ===================== -->
   <footer>
-    <span class="footer-logo">The Crustacean Genome Project</span>
+    <span class="footer-logo">The Crustacean Genomes Project</span>
+
     <ul class="footer-links">
       <li><a href="#">GitHub</a></li>
       <li><a href="#">Contact</a></li>
