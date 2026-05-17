@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — The Crustacean Genomes Project</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================
+       VARIABLES & RESET
+    ===================== */
+    :root {
+      --cyan:   #2BB5E8;
+      --black:  #0e1520;
+      --white:  #f5f4f0;
+      --grey:   #4a5260;
+      --border: rgba(14, 21, 32, 0.1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* =====================
+       NAVIGATION
+    ===================== */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--black);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo .nav-logo-crustacean { color: var(--cyan); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .nav-links a {
+      color: rgba(245, 244, 240, 0.7);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--cyan); }
+
+    .nav-cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--cyan);
+      color: var(--white);
+      border: none;
+      padding: 9px 22px;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* =====================
+       PAGE HEADER
+    ===================== */
+    .page-header {
+      padding: 64px 48px 56px;
+      border-bottom: 1px solid var(--border);
+      max-width: 860px;
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 64px;
+      letter-spacing: 0.03em;
+      line-height: 1;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+
+    .page-intro {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--grey);
+      max-width: 680px;
+    }
+
+    /* =====================
+       STAT STRIP
+    ===================== */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-cell {
+      padding: 28px 48px;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat-cell:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 44px;
+      letter-spacing: 0.03em;
+      color: var(--cyan);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-top: 6px;
+    }
+
+    /* =====================
+       BODY SECTIONS
+    ===================== */
+    .content-section {
+      padding: 56px 48px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .section-label-col {
+      padding-top: 4px;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    .section-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      line-height: 1.05;
+    }
+
+    .section-body {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--grey);
+    }
+
+    .section-body p + p {
+      margin-top: 18px;
+    }
+
+    .section-body strong {
+      font-weight: 500;
+      color: var(--black);
+    }
+
+    /* =====================
+       THREE PILLARS
+    ===================== */
+    .pillars-section {
+      padding: 56px 48px 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pillars-header {
+      margin-bottom: 40px;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .pillar-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .pillar-bar {
+      width: 28px;
+      height: 2px;
+      background: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .pillar-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.06em;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+
+    .pillar-body {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--grey);
+    }
+      footer { padding: 20px; flex-direction: column; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================
+       NAVIGATION
+  ===================== -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-the">The </span><span class="nav-logo-crustacean">Crustacean</span> Genomes Project
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="species.html">Species</a></li>
+      <li><a href="data.html">Data</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="community.html">Community</a></li>
+    </ul>
+    <button class="nav-cta">Join the Project</button>
+  </nav>
+
+  <!-- =====================
+       PAGE HEADER
+  ===================== -->
+  <header class="page-header">
+    <p class="page-eyebrow">About the Project</p>
+    <h1 class="page-title">Why Crustacean Genomes?</h1>
+    <p class="page-intro">
+      Crustacea is one of the most species-rich and ecologically diverse animal groups, yet
+      it remains among the least represented in genome databases. CrustGP is a community
+      effort to close that gap through coordinated taxon selection, standardised assembly
+      and deposition practices, and collaboration across the research disciplines that depend
+      on crustacean genomic data.
+    </p>
+  </header>
+
+  <!-- =====================
+       STAT STRIP
+  ===================== -->
+  <div class="stat-strip">
+    <div class="stat-cell">
+      <div class="stat-num">&lt;35</div>
+      <div class="stat-label">High-quality assemblies as of early 2025</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">~50%</div>
+      <div class="stat-label">Of crustacean orders absent from multigene analyses</div>
+    </div>
+
+  </div>
+
+  <!-- =====================
+       THE GAP
+  ===================== -->
+  <div class="content-section">
+    <div class="section-label-col">
+      <p class="section-eyebrow">The Problem</p>
+      <h2 class="section-heading">A Striking Gap</h2>
+    </div>
+    <div class="section-body">
+      <p>
+        Fewer than 35 high-quality genome assemblies exist across Crustacea as of early 2025,
+        and coverage is heavily skewed: nearly half of the 57 recognised orders are absent from
+        multigene phylogenetic analyses, with available transcriptomic data overwhelmingly
+        concentrated in Malacostraca. The majority of crustacean diversity, including many
+        ecologically and economically significant lineages, remains genomically uncharacterised.
+      </p>
+      <p>
+        Assembly presents genuine technical challenges that compound this underrepresentation.
+        Crustacean genomes are often large, highly repetitive, and heterozygous, properties
+        that reduce contiguity, complicate heterozygosity-aware assembly, and make annotation
+        difficult. Field preservation conditions frequently degrade high-molecular-weight DNA,
+        restricting access to the long-read data these genomes require. Addressing the gap
+        therefore involves both improved coordination and continued methodological development.
+      </p>
+    </div>
+  </div>
+
+  <!-- =====================
+       OUR APPROACH
+  ===================== -->
+  <div class="content-section">
+    <div class="section-label-col">
+      <p class="section-eyebrow">Our Approach</p>
+      <h2 class="section-heading">From Opportunistic to Coordinated</h2>
+    </div>
+    <div class="section-body">
+      <p>
+        Crustacean genome sequencing has largely been opportunistic, reflecting individual
+        lab interests and funding opportunities rather than systematic coverage of the
+        subphylum. Sequencing costs and assembly tools have improved substantially, but the
+        field still lacks shared criteria for taxon prioritisation, agreed quality thresholds,
+        and infrastructure for connecting researchers across systematics, genomics, ecology,
+        fisheries, conservation, and aquaculture.
+      </p>
+      <p>
+        CrustGP addresses this by providing a coordination framework: agreed priority taxa,
+        standardised assembly and annotation workflows, voucher-linked specimen requirements,
+        and open data deposition as a baseline expectation. The aim is a comparative genomic
+        resource that accumulates systematically across crustacean diversity, rather than
+        remaining concentrated in a handful of tractable or commercially relevant species.
+      </p>
+    </div>
+  </div>
+
+  <!-- =====================
+       THREE PILLARS
+  ===================== -->
+  <section class="pillars-section">
+    <div class="pillars-header">
+      <p class="section-eyebrow">The Goal</p>
+      <h2 class="section-heading">Project Priorities</h2>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-bar"></div>
+        <div class="pillar-title">Strategic Taxonomic Sampling</div>
+        <div class="pillar-body">
+          Taxon selection is guided by phylogenetic gap-filling across all major crustacean
+          lineages, with priority given to orders and families absent from existing comparative
+          datasets. Commercial relevance alone is not a sufficient criterion.
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-bar"></div>
+        <div class="pillar-title">Quality & Open Data Standards</div>
+        <div class="pillar-body">
+          Assemblies are produced to the highest quality achievable for each taxon, with
+          open deposition, complete metadata, voucher-linked specimens, and reproducible
+          workflows as baseline requirements. Resources generated through CrustGP are
+          intended for broad reuse across research communities.
+        </div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-bar"></div>
+        <div class="pillar-title">Community Coordination</div>
+        <div class="pillar-body">
+          Closing the genomic gap in Crustacea requires input from systematics, genomics,
+          ecology, conservation, fisheries, and aquaculture, disciplines that have largely
+          operated independently. CrustGP provides the organisational structure to connect
+          them around shared priorities and shared data.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <!-- =====================
+       FOOTER
+  ===================== -->
+  <footer>
+    <span class="footer-logo">The Crustacean Genomes Project</span>
+    <ul class="footer-links">
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
