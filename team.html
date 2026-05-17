@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team — The Crustacean Genomes Project</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================
+       VARIABLES & RESET
+    ===================== */
+    :root {
+      --cyan:   #2BB5E8;
+      --black:  #0e1520;
+      --white:  #f5f4f0;
+      --grey:   #4a5260;
+      --border: rgba(14, 21, 32, 0.1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* =====================
+       NAVIGATION
+    ===================== */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--black);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo .nav-logo-crustacean {
+      color: var(--cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .nav-links a {
+      color: rgba(245, 244, 240, 0.7);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--cyan);
+    }
+
+    .nav-cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--cyan);
+      color: var(--white);
+      border: none;
+      padding: 9px 22px;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* =====================
+       PAGE HEADER
+    ===================== */
+    .page-header {
+      padding: 64px 48px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 64px;
+      letter-spacing: 0.03em;
+      line-height: 1;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .page-desc {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--grey);
+      max-width: 580px;
+    }
+
+    /* =====================
+       STATS STRIP
+    ===================== */
+    .team-stats {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-stat {
+      padding: 20px 48px;
+      border-right: 1px solid var(--border);
+    }
+
+    .team-stat:last-child { border-right: none; }
+
+    .team-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 0.03em;
+      color: var(--cyan);
+      line-height: 1;
+    }
+
+    .team-stat-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-top: 4px;
+    }
+
+    /* =====================
+       FILTER BAR
+    ===================== */
+    .filter-bar {
+      padding: 20px 48px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .filter-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-right: 4px;
+    }
+
+    .filter-input {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      padding: 7px 14px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--black);
+      outline: none;
+      width: 240px;
+    }
+
+    .filter-input:focus {
+      border-color: var(--cyan);
+    }
+
+    .filter-input::placeholder {
+      color: rgba(74, 82, 96, 0.5);
+    }
+
+    .result-count {
+      margin-left: auto;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--grey);
+    }
+
+    /* =====================
+       MEMBER GRID
+    ===================== */
+    .team-section {
+      padding: 48px 48px 64px;
+    }
+
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .member-card {
+      background: var(--white);
+      padding: 28px 28px 24px;
+      transition: background 0.15s ease;
+    }
+
+    .member-card:hover {
+      background: #fff;
+    }
+
+    .member-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 19px;
+      letter-spacing: 0.05em;
+      color: var(--black);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .member-institution {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--cyan);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .member-country {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    .member-interests {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--grey);
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* hidden by search filter */
+    .member-card.hidden {
+      display: none;
+    }
+
+    /* =====================
+       NO RESULTS
+    ===================== */
+    .no-results {
+      display: none;
+      padding: 48px;
+      text-align: center;
+      color: var(--grey);
+      font-size: 14px;
+      font-weight: 300;
+      grid-column: 1 / -1;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--grey);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-links a {
+      color: var(--grey);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--cyan); }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 900px) {
+      .member-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .page-header { padding: 40px 20px 32px; }
+      .page-title { font-size: 44px; }
+      .team-stats { flex-wrap: wrap; }
+      .team-stat { padding: 16px 20px; }
+      .filter-bar { padding: 16px 20px; }
+      .filter-input { width: 100%; }
+      .team-section { padding: 32px 20px 48px; }
+      .member-grid { grid-template-columns: 1fr; }
+      footer { padding: 20px; flex-direction: column; gap: 14px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================
+       NAVIGATION
+  ===================== -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-the">The </span><span class="nav-logo-crustacean">Crustacean</span> Genomes Project
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="species.html">Species</a></li>
+      <li><a href="data.html">Data</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="team.html" class="active">Team</a></li>
+      <li><a href="community.html">Community</a></li>
+    </ul>
+
+    <button class="nav-cta">Join the Project</button>
+  </nav>
+
+  <!-- =====================
+       PAGE HEADER
+  ===================== -->
+  <header class="page-header">
+    <p class="page-eyebrow">The People</p>
+    <h1 class="page-title">Our Team</h1>
+    <p class="page-desc">
+      Researchers spanning systematics, genomics, ecology, evolution, conservation,
+      fisheries, aquaculture, and bioinformatics — united around expanding open
+      crustacean genome resources.
+    </p>
+  </header>
+
+  <!-- =====================
+       STATS STRIP
+  ===================== -->
+  <div class="team-stats">
+    <div class="team-stat">
+      <div class="team-stat-num">54</div>
+      <div class="team-stat-label">Contributors</div>
+    </div>
+    <div class="team-stat">
+      <div class="team-stat-num">20</div>
+      <div class="team-stat-label">Countries</div>
+    </div>
+    <div class="team-stat">
+      <div class="team-stat-num">38</div>
+      <div class="team-stat-label">Institutions</div>
+    </div>
+  </div>
+
+  <!-- =====================
+       FILTER BAR
+  ===================== -->
+  <div class="filter-bar">
+    <span class="filter-label">Search</span>
+    <input
+      class="filter-input"
+      type="text"
+      id="memberSearch"
+      placeholder="Name, institution, or interest…"
+      aria-label="Filter team members"
+    >
+    <span class="result-count" id="resultCount">54 members</span>
+  </div>
+
+  <!-- =====================
+       MEMBER GRID
+  ===================== -->
+  <section class="team-section">
+    <div class="member-grid" id="memberGrid">
+
+      <!-- FEATURED (custom order) -->
+      <div class="member-card" data-search="jessica a. thomas thorpe wellcome sanger institute united kingdom phylogenomics of isopods tree of life genomics">
+        <div class="member-name">Jessica A. Thomas Thorpe</div>
+        <div class="member-institution">Wellcome Sanger Institute</div>
+        <div class="member-meta"><span class="member-country">United Kingdom</span></div>
+        <p class="member-interests">Phylogenomics of isopods / Tree of Life genomics</p>
+      </div>
+
+      <div class="member-card" data-search="heather bracken-grissom florida international university usa crustacean phylogenomics marine biodiversity evolutionary genomics">
+        <div class="member-name">Heather Bracken-Grissom</div>
+        <div class="member-institution">Florida International University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Crustacean phylogenomics; marine biodiversity; evolutionary genomics</p>
+      </div>
+
+      <div class="member-card" data-search="natalie whitaker-allen florida international university usa evolutionary genomics conservation biology population genomics biodiversity">
+        <div class="member-name">Natalie Whitaker-Allen</div>
+        <div class="member-institution">Florida International University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Evolutionary genomics, conservation biology, population genomics, biodiversity</p>
+      </div>
+
+      <!-- REST (alphabetical by last name) -->
+      <div class="member-card" data-search="tang boping yancheng teachers university china tidal-flat biological resources conservation utilization">
+        <div class="member-name">Tang Boping (唐伯平)</div>
+        <div class="member-institution">Yancheng Teachers University</div>
+        <div class="member-meta"><span class="member-country">China</span></div>
+        <p class="member-interests">Tidal-flat biological resources and their conservation/utilization</p>
+      </div>
+
+      <div class="member-card" data-search="ada acevedo-alonso universidad de los andes colombia freshwater crustacea aquatic ecology taxonomy conservation">
+        <div class="member-name">Ada Acevedo-Alonso</div>
+        <div class="member-institution">Universidad de los Andes</div>
+        <div class="member-meta"><span class="member-country">Colombia</span></div>
+        <p class="member-interests">Freshwater Crustacea; aquatic ecology, taxonomy, and conservation</p>
+      </div>
+
+      <div class="member-card" data-search="shane ahyong australian museum australia crustacean taxonomy systematics natural sciences">
+        <div class="member-name">Shane Ahyong</div>
+        <div class="member-institution">Australian Museum</div>
+        <div class="member-meta"><span class="member-country">Australia</span></div>
+        <p class="member-interests">Crustacean taxonomy/systematics; natural sciences</p>
+      </div>
+
+      <div class="member-card" data-search="acacia alcivar-warren environmental genomics inc ecuador shrimp genome epigenome shrimpencoded">
+        <div class="member-name">Acacia Alcivar-Warren</div>
+        <div class="member-institution">Environmental Genomics Inc.</div>
+        <div class="member-meta"><span class="member-country">Ecuador</span></div>
+        <p class="member-interests">The Shrimp Genome and Epigenome (ShrimpENCODE) Project</p>
+      </div>
+
+      <div class="member-card" data-search="j. antonio baeza clemson university usa evolutionary biology marine organisms decapod crustaceans symbiosis mitochondrial evolution">
+        <div class="member-name">J. Antonio Baeza</div>
+        <div class="member-institution">Clemson University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Evolutionary biology of marine organisms; decapod crustaceans; symbiosis; mitochondrial evolution</p>
+      </div>
+
+      <div class="member-card" data-search="alyssa baker clemson university usa population genomics mitochondrial genome evolution phylogeny achelata">
+        <div class="member-name">Alyssa Baker</div>
+        <div class="member-institution">Clemson University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Population genomics, mitochondrial genome evolution, and phylogeny of the Achelata</p>
+      </div>
+
+      <div class="member-card" data-search="jamie bojko teesside university united kingdom aquatic animal health crustacean pathology viruses">
+        <div class="member-name">Jamie Bojko</div>
+        <div class="member-institution">Teesside University</div>
+        <div class="member-meta"><span class="member-country">United Kingdom</span></div>
+        <p class="member-interests">Aquatic animal health; crustacean pathology; viruses of crustaceans</p>
+      </div>
+
+      <div class="member-card" data-search="john a. burns bigelow laboratory ocean sciences usa protist biology symbiosis eukaryote evolution systems biology">
+        <div class="member-name">John A. Burns</div>
+        <div class="member-institution">Bigelow Laboratory for Ocean Sciences</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Protist biology; symbiosis; eukaryote evolution; systems biology</p>
+      </div>
+
+      <div class="member-card" data-search="solomon tin chi chak denison university usa evolution genomics animal behavior snapping shrimp">
+        <div class="member-name">Solomon Tin Chi Chak</div>
+        <div class="member-institution">Denison University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Evolution; genomics; animal behavior; snapping shrimp</p>
+      </div>
+
+      <div class="member-card" data-search="coraline chapperon ecole normale superieure psl france">
+        <div class="member-name">Coraline Chapperon</div>
+        <div class="member-institution">École Normale Supérieure / PSL</div>
+        <div class="member-meta"><span class="member-country">France</span></div>
+      </div>
+
+      <div class="member-card" data-search="fraser clark dalhousie university canada crustacean immunity disease lobster crabs">
+        <div class="member-name">Fraser Clark</div>
+        <div class="member-institution">Dalhousie University</div>
+        <div class="member-meta"><span class="member-country">Canada</span></div>
+        <p class="member-interests">Crustacean immunity/disease in lobster and crabs</p>
+      </div>
+
+      <div class="member-card" data-search="keith a. crandall george washington university usa computational biology systematics population biology gis genetics bioinformatics">
+        <div class="member-name">Keith A. Crandall</div>
+        <div class="member-institution">George Washington University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Computational biology; systematics; population biology; GIS; genetics/bioinformatics</p>
+      </div>
+
+      <div class="member-card" data-search="hugues roest crollius ecole normale superieure ibens psl france comparative genomics genome evolution marine genomes atlasea">
+        <div class="member-name">Hugues Roest Crollius</div>
+        <div class="member-institution">École Normale Supérieure / IBENS, PSL Research University</div>
+        <div class="member-meta"><span class="member-country">France</span></div>
+        <p class="member-interests">Comparative genomics; genome evolution; marine genomes (ATLASea)</p>
+      </div>
+
+      <div class="member-card" data-search="edwin cruz-rivera morgan state university virgin islands usa crustacean nutritional chemical ecology symbiosis freshwater taxonomy">
+        <div class="member-name">Edwin Cruz-Rivera</div>
+        <div class="member-institution">Morgan State University / University of the Virgin Islands</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Crustacean nutritional and chemical ecology, symbiosis, freshwater crustaceans, taxonomy</p>
+      </div>
+
+      <div class="member-card" data-search="danielle deleo florida international university usa">
+        <div class="member-name">Danielle DeLeo</div>
+        <div class="member-institution">Florida International University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+      </div>
+
+      <div class="member-card" data-search="andrea desiderato university of lodz poland marine invertebrate zoology amphipods biodiversity molecular taxonomy">
+        <div class="member-name">Andrea Desiderato</div>
+        <div class="member-institution">University of Lodz</div>
+        <div class="member-meta"><span class="member-country">Poland</span></div>
+        <p class="member-interests">Marine invertebrate zoology; amphipods; biodiversity; molecular taxonomy</p>
+      </div>
+
+      <div class="member-card" data-search="robert e. ditter florida international university usa anchialine shrimps decapod crustacean taxonomy systematics">
+        <div class="member-name">Robert E. Ditter</div>
+        <div class="member-institution">Florida International University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Anchialine shrimps; decapod crustacean taxonomy/systematics</p>
+      </div>
+
+      <div class="member-card" data-search="yann dussert genoscope cnrs france oniscidea genomics">
+        <div class="member-name">Yann Dussert</div>
+        <div class="member-institution">Genoscope / CNRS</div>
+        <div class="member-meta"><span class="member-country">France</span></div>
+        <p class="member-interests">Oniscidea genomics</p>
+      </div>
+
+      <div class="member-card" data-search="lucia sainz escudero nord university norway conservation population genomics molecular taxonomy anostraca paguroidea">
+        <div class="member-name">Lucia Sainz Escudero</div>
+        <div class="member-institution">Nord University</div>
+        <div class="member-meta"><span class="member-country">Norway</span></div>
+        <p class="member-interests">Conservation and population genomics, molecular taxonomy</p>
+      </div>
+
+      <div class="member-card" data-search="patricia esquete university of aveiro cesam portugal marine biodiversity tanaidacea meiofauna taxonomy systematics peracarida">
+        <div class="member-name">Patricia Esquete</div>
+        <div class="member-institution">University of Aveiro / CESAM</div>
+        <div class="member-meta"><span class="member-country">Portugal</span></div>
+        <p class="member-interests">Marine biodiversity; Tanaidacea; meiofauna; taxonomy/systematics</p>
+      </div>
+
+      <div class="member-card" data-search="jean-francois flot universite libre de bruxelles ulb belgium molecular systematics genome assembly evolution microbiomes edna bioinformatics">
+        <div class="member-name">Jean-François Flot</div>
+        <div class="member-institution">Université libre de Bruxelles (ULB)</div>
+        <div class="member-meta"><span class="member-country">Belgium</span></div>
+        <p class="member-interests">Molecular systematics; genome assembly; genome evolution; microbiomes; eDNA; bioinformatics</p>
+      </div>
+
+      <div class="member-card" data-search="sara fratini university of florence italy metabarcoding genomics evolution biodiversity monitoring edna">
+        <div class="member-name">Sara Fratini</div>
+        <div class="member-institution">University of Florence</div>
+        <div class="member-meta"><span class="member-country">Italy</span></div>
+        <p class="member-interests">Metabarcoding; genomics; evolution of species-specific traits; biodiversity monitoring using eDNA</p>
+      </div>
+
+      <div class="member-card" data-search="brooke grubb george washington university usa freshwater crayfish systematics genomics evolution conservation">
+        <div class="member-name">Brooke Grubb</div>
+        <div class="member-institution">George Washington University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Freshwater crayfish systematics, genomics, evolution, conservation</p>
+      </div>
+
+      <div class="member-card" data-search="maureen howard florida international university usa">
+        <div class="member-name">Maureen Howard</div>
+        <div class="member-institution">Florida International University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+      </div>
+
+      <div class="member-card" data-search="carla hurt tennessee tech university usa molecular ecology marine freshwater organisms conservation genetics">
+        <div class="member-name">Carla Hurt</div>
+        <div class="member-institution">Tennessee Tech University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Molecular ecology; marine and freshwater organisms; conservation genetics</p>
+      </div>
+
+      <div class="member-card" data-search="lucas a. jennings university of florida usa marine ecology aquatic pathology isopod crustacean systematics">
+        <div class="member-name">Lucas A. Jennings</div>
+        <div class="member-institution">University of Florida</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Marine ecology; aquatic pathology context; isopod/crustacean systematics</p>
+      </div>
+
+      <div class="member-card" data-search="aurelien de jode university of alabama usa peracarida phylogenomics cumacea comparative genomics">
+        <div class="member-name">Aurélien De Jode</div>
+        <div class="member-institution">University of Alabama</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Peracarida phylogenomics and Cumacea comparative genomics</p>
+      </div>
+
+      <div class="member-card" data-search="sadia kamal clemson university usa marine evolutionary biology crustacean genomics">
+        <div class="member-name">Sadia Kamal</div>
+        <div class="member-institution">Clemson University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Biological sciences; marine evolutionary biology/crustacean genomics</p>
+      </div>
+
+      <div class="member-card" data-search="sahar khodami senckenberg germany metabarcoding ngs marine biodiversity copepod systematics">
+        <div class="member-name">Sahar Khodami</div>
+        <div class="member-institution">Senckenberg am Meer, German Centre for Marine Biodiversity Research</div>
+        <div class="member-meta"><span class="member-country">Germany</span></div>
+        <p class="member-interests">Metabarcoding; NGS; marine biodiversity; copepod systematics</p>
+      </div>
+
+      <div class="member-card" data-search="alex kingston university of tulsa usa invertebrate neurobiology snapping shrimp biomechanics">
+        <div class="member-name">Alex Kingston</div>
+        <div class="member-institution">University of Tulsa</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Invertebrate neurobiology; snapping shrimp biomechanics/neurobiology</p>
+      </div>
+
+      <div class="member-card" data-search="kevin m. kocot university of alabama museum natural history usa invertebrate zoology phylogenomics marine invertebrate evolution peracarida">
+        <div class="member-name">Kevin M. Kocot</div>
+        <div class="member-institution">University of Alabama / Alabama Museum of Natural History</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Invertebrate zoology; phylogenomics; marine invertebrate evolution</p>
+      </div>
+
+      <div class="member-card" data-search="tomasz mamos university of lodz poland phylogeny molecular evolution amphipoda crustaceans">
+        <div class="member-name">Tomasz Mamos</div>
+        <div class="member-institution">University of Lodz</div>
+        <div class="member-meta"><span class="member-country">Poland</span></div>
+        <p class="member-interests">Phylogeny and molecular evolution of Amphipoda crustaceans</p>
+      </div>
+
+      <div class="member-card" data-search="kenneth meland university of bergen norway crustacean biodiversity systematics remipedes marine invertebrates">
+        <div class="member-name">Kenneth Meland</div>
+        <div class="member-institution">University of Bergen</div>
+        <div class="member-meta"><span class="member-country">Norway</span></div>
+        <p class="member-interests">Crustacean biodiversity/systematics (esp. remipedes and related marine invertebrates)</p>
+      </div>
+
+      <div class="member-card" data-search="todd h. oakley university of california santa barbara usa evolution complex traits eyes nervous systems marine invertebrates">
+        <div class="member-name">Todd H. Oakley</div>
+        <div class="member-institution">University of California, Santa Barbara</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Evolution of complex traits, especially eyes and nervous systems in marine invertebrates</p>
+      </div>
+
+      <div class="member-card" data-search="karen osborn smithsonian national museum natural history usa deep-sea evolutionary biology annelids peracarids marine biodiversity">
+        <div class="member-name">Karen Osborn</div>
+        <div class="member-institution">Smithsonian National Museum of Natural History</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Deep-sea evolutionary biology; annelids and peracarids; marine biodiversity</p>
+      </div>
+
+      <div class="member-card" data-search="ferran palero university of valencia spain crustacean systematics larval identification phylogenomics">
+        <div class="member-name">Ferran Palero</div>
+        <div class="member-institution">University of Valencia</div>
+        <div class="member-meta"><span class="member-country">Spain</span></div>
+        <p class="member-interests">Crustacean systematics; larval identification; phylogenomics</p>
+      </div>
+
+      <div class="member-card" data-search="marta perez-losada george washington university usa biostatistics bioinformatics phylogeography computational biology barnacle thecostraca">
+        <div class="member-name">Marta Pérez-Losada</div>
+        <div class="member-institution">George Washington University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Biostatistics and bioinformatics; phylogeography; computational biology</p>
+      </div>
+
+      <div class="member-card" data-search="pedro augusto da silva peres florida international university usa population genomics comparative genomics deep-sea crustaceans edna">
+        <div class="member-name">Pedro Augusto Da Silva Peres</div>
+        <div class="member-institution">Florida International University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Population Genomics, Comparative Genomics, Deep-sea crustaceans, eDNA</p>
+      </div>
+
+      <div class="member-card" data-search="nina ramos florida international university usa">
+        <div class="member-name">Nina Ramos</div>
+        <div class="member-institution">Florida International University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+      </div>
+
+      <div class="member-card" data-search="torben riehl senckenberg research institute germany deep-sea benthic biodiversity abyssal crustaceans">
+        <div class="member-name">Torben Riehl</div>
+        <div class="member-institution">Senckenberg Research Institute / Natural History Museum Frankfurt</div>
+        <div class="member-meta"><span class="member-country">Germany</span></div>
+        <p class="member-interests">Deep-sea benthic biodiversity, especially abyssal crustaceans</p>
+      </div>
+
+      <div class="member-card" data-search="paula c. rodriguez-flores museum national histoire naturelle france squat lobster systematics taxonomy crustacean biodiversity anomura isopoda">
+        <div class="member-name">Paula C. Rodríguez-Flores</div>
+        <div class="member-institution">Muséum national d'Histoire naturelle</div>
+        <div class="member-meta"><span class="member-country">France</span></div>
+        <p class="member-interests">Squat lobster systematics and taxonomy; crustacean biodiversity</p>
+      </div>
+
+      <div class="member-card" data-search="michael s. rosenberg virginia commonwealth university usa evolutionary biology data science biological complexity biogeography">
+        <div class="member-name">Michael S. Rosenberg</div>
+        <div class="member-institution">Virginia Commonwealth University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Evolutionary biology; data science; biological complexity; biogeography</p>
+      </div>
+
+      <div class="member-card" data-search="kareen e. schnabel niwa new zealand deep-sea crustacean taxonomy systematics">
+        <div class="member-name">Kareen E. Schnabel</div>
+        <div class="member-institution">NIWA (National Institute of Water &amp; Atmospheric Research)</div>
+        <div class="member-meta"><span class="member-country">New Zealand</span></div>
+        <p class="member-interests">Deep-sea crustacean taxonomy and systematics</p>
+      </div>
+
+      <div class="member-card" data-search="martin schwentner natural history museum vienna austria phylogeny biogeography crustacean evolution systematics">
+        <div class="member-name">Martin Schwentner</div>
+        <div class="member-institution">Natural History Museum Vienna</div>
+        <div class="member-meta"><span class="member-country">Austria</span></div>
+        <p class="member-interests">Phylogeny; biogeography; crustacean evolution/systematics</p>
+      </div>
+
+      <div class="member-card" data-search="emma palacios theil university of lodz poland deep-sea biogeography peracarid crustacean biodiversity">
+        <div class="member-name">Emma Palacios Theil</div>
+        <div class="member-institution">University of Lodz</div>
+        <div class="member-meta"><span class="member-country">Poland</span></div>
+        <p class="member-interests">Deep-sea biogeography; peracarid/crustacean biodiversity</p>
+      </div>
+
+      <div class="member-card" data-search="regina wetzer natural history museum los angeles county usa marine biodiversity crustacean collections isopods systematics">
+        <div class="member-name">Regina Wetzer</div>
+        <div class="member-institution">Natural History Museum of Los Angeles County</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Marine biodiversity; crustacean collections; isopods/systematics</p>
+      </div>
+
+      <div class="member-card" data-search="mary wicksten texas a&m university usa marine invertebrates decapod crustaceans evolution">
+        <div class="member-name">Mary Wicksten</div>
+        <div class="member-institution">Texas A&amp;M University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Marine invertebrates; decapod crustaceans; evolution</p>
+      </div>
+
+      <div class="member-card" data-search="patrick wincker genoscope cnrs france">
+        <div class="member-name">Patrick Wincker</div>
+        <div class="member-institution">Genoscope / CNRS</div>
+        <div class="member-meta"><span class="member-country">France</span></div>
+      </div>
+
+      <div class="member-card" data-search="amanda m. windsor us food drug administration usa food genomics regulatory science seafood nomenclature genome surveillance">
+        <div class="member-name">Amanda M. Windsor</div>
+        <div class="member-institution">U.S. Food and Drug Administration</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Food genomics / regulatory science / seafood nomenclature and genome surveillance</p>
+      </div>
+
+      <div class="member-card" data-search="joanna m. wolfe harvard university usa evolutionary biology arthropod crab ostracod phylogenomics convergent evolution fossil calibration">
+        <div class="member-name">Joanna M. Wolfe</div>
+        <div class="member-institution">Harvard University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Evolutionary biology; arthropod/crab/ostracod phylogenomics; convergent evolution, fossil calibration/total evidence</p>
+      </div>
+
+      <div class="member-card" data-search="meng-chen yu george washington university usa coral reef ecosystems aquaculture symbiosis larval biology barnacle taxonomy thecostraca">
+        <div class="member-name">Meng-Chen Yu</div>
+        <div class="member-institution">George Washington University</div>
+        <div class="member-meta"><span class="member-country">USA</span></div>
+        <p class="member-interests">Coral reef ecosystems; aquaculture systems; symbiosis; larval biology; barnacle taxonomy</p>
+      </div>
+
+      <!-- No-results message (hidden by default) -->
+      <div class="no-results" id="noResults">No members match your search.</div>
+
+    </div>
+  </section>
+
+  <!-- =====================
+       FOOTER
+  ===================== -->
+  <footer>
+    <span class="footer-logo">The Crustacean Genomes Project</span>
+    <ul class="footer-links">
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </footer>
+
+  <!-- =====================
+       SEARCH SCRIPT
+  ===================== -->
+  <script>
+    const input = document.getElementById('memberSearch');
+    const cards = document.querySelectorAll('.member-card');
+    const countEl = document.getElementById('resultCount');
+    const noResults = document.getElementById('noResults');
+
+    input.addEventListener('input', function () {
+      const q = this.value.toLowerCase().trim();
+      let visible = 0;
+
+      cards.forEach(card => {
+        if (card === noResults) return;
+        const match = !q || card.dataset.search.includes(q);
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+
+      countEl.textContent = q ? `${visible} of 54 members` : '54 members';
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    });
+  </script>
+
+</body>
+</html>
