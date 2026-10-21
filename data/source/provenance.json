@@ -1,0 +1,8 @@
+{
+  "source_file": "crustacean_genomes(2).xlsx",
+  "sha256": "5af56ea1715cf74856dc884f87a2d1377b71a30452fc1a3fed02a791373641f0",
+  "records": 410,
+  "source_retrieval_date": null,
+  "source_note": "User-supplied NCBI assembly workbook. Original retrieval date and query are not recorded in this file. This is a frozen input, not a live NCBI census.",
+  "review_status": "Provisional; nuclear scope, taxonomic ranks, synonyms, paired accessions and haplotypes require curation."
+}

@@ -1,0 +1,91 @@
+/* =====================
+   HERO SILHOUETTE CAROUSEL
+===================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Keeps the title, mission statement, and button above the silhouettes */
+.hero-eyebrow,
+.hero-title,
+.hero-desc,
+.hero-actions {
+  position: relative;
+  z-index: 3;
+}
+
+.crustacean-carousel {
+  position: absolute;
+  top: 95px;
+  right: 0;
+  width: 72%;
+  height: 430px;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.crustacean-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 100%;
+  animation: crustaceanScroll 55s linear infinite;
+}
+
+.crustacean-track img {
+  height: 330px;
+  width: auto;
+  margin-right: 8rem;
+  opacity: 0.95;
+}
+
+/* Fade effect near the title */
+.crustacean-carousel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    #f5f4f0 0%,
+    rgba(245, 244, 240, 0.95) 5%,
+    rgba(245, 244, 240, 0.55) 10%,
+    rgba(245, 244, 240, 0) 22%
+  );
+}
+
+/* Continuous scrolling animation */
+@keyframes crustaceanScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Accessibility: disables motion for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .crustacean-track {
+    animation: none;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .crustacean-carousel {
+    opacity: 0.12;
+    width: 100%;
+    top: 160px;
+    height: 300px;
+  }
+
+  .crustacean-track img {
+    height: 220px;
+  }
+}

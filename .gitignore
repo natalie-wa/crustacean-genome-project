@@ -1,0 +1,10 @@
+dist/
+__pycache__/
+*.py[cod]
+.DS_Store
+.AppleDouble/
+node_modules/
+.env
+.env.*
+!.env.example
+*.log

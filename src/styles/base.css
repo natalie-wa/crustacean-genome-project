@@ -1,0 +1,180 @@
+/* Shared brand, reset, navigation, buttons, and footer. */
+
+    /* =====================
+       VARIABLES & RESET
+    ===================== */
+    :root {
+      --cyan:    #2BB5E8;
+      --black:   #0e1520;
+      --white:   #f5f4f0;
+      --grey:    #4a5260;
+      --border:  rgba(14, 21, 32, 0.1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* =====================
+       NAVIGATION
+    ===================== */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--black);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-logo .nav-logo-the {
+      color: var(--white);
+    }
+
+    .nav-logo .nav-logo-crustacean {
+      color: var(--cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .nav-links a {
+      color: rgba(245, 244, 240, 0.7);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    .nav-cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--cyan);
+      color: var(--white);
+      border: none;
+      padding: 9px 22px;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.85;
+    }
+
+    .btn-primary {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--cyan);
+      color: var(--white);
+      border: none;
+      padding: 13px 30px;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.85;
+    }
+
+    .btn-ghost {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      color: var(--cyan);
+    }
+
+    .btn-dark {
+      display: inline-block;
+      margin-top: 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--black);
+      color: var(--cyan);
+      border: none;
+      padding: 11px 24px;
+      cursor: pointer;
+    }
+
+    .btn-dark:hover {
+      opacity: 0.85;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.2em;
+      color: var(--grey);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-links a {
+      color: var(--grey);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--cyan);
+    }
