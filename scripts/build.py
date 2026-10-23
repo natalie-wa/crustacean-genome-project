@@ -1,6 +1,7 @@
 """Build a portable GitHub Pages site using only the Python standard library."""
 from pathlib import Path
 import csv, json, shutil, re
+from biodiversity import prepare
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'dist'
 
@@ -16,6 +17,7 @@ def build():
         for k in ['length','n50','contigN50']: r[k] = int(float(r[k])) if r[k] else None
         for k in ['gc','busco']: r[k] = float(r[k]) if r[k] else None
     (OUT/'data').mkdir()
+    prepare(ROOT, OUT, records)
     (OUT/'data/assemblies.json').write_text(json.dumps(records, ensure_ascii=False))
     (OUT/'data/assemblies.js').write_text('window.CRUSTGP_RECORDS = '+json.dumps(records,ensure_ascii=False)+';\n')
     shutil.copy(ROOT/'data/source/assemblies.csv', OUT/'data/assemblies.csv')

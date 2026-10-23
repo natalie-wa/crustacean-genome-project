@@ -2,7 +2,7 @@ import {comparisonGroups,distinct,summarize,filterRecords,csvText,toggleComparis
 const $=id=>document.getElementById(id);
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const number=x=>Number(x).toLocaleString('en-US');
-let records=[],filtered=[],page=0,selected=[],pageSize=10;
+let records=[],filtered=[],page=0,selected=[],pageSize=10,coverageAccessions=null;
 const tabIds=['overview','records','gaps'];
 function showTab(id,{focus=false,updateUrl=true}={}){
  if(id==='compare')id='records';
@@ -33,7 +33,7 @@ function overview(){
 }
 function populate(id,values,all,selected=''){ $(id).replaceChildren();const empty=new Option(all,'');$(id).add(empty);[...new Set(values)].filter(Boolean).sort().forEach(v=>$(id).add(new Option(v,v)));if(values.includes(selected))$(id).value=selected;}
 function updateOrders(){const current=$('order-filter').value;const rows=records.filter(r=>!$('class-filter').value||r.class===$('class-filter').value);populate('order-filter',rows.map(r=>r.order),'All orders',current);}
-function applyFilters(){filtered=filterRecords(records,{query:$('search').value,className:$('class-filter').value,order:$('order-filter').value,level:$('level-filter').value,hideShort:$('hide-short').checked,reviewOnly:$('review-only').checked});page=0;renderRecords();}
+function applyFilters(){filtered=filterRecords(coverageAccessions?records.filter(r=>coverageAccessions.has(r.accession)):records,{query:$('search').value,className:$('class-filter').value,order:$('order-filter').value,level:$('level-filter').value,hideShort:$('hide-short').checked,reviewOnly:$('review-only').checked});page=0;renderRecords();}
 function renderComparison(){
  const rows=selected.map(a=>records.find(r=>r.accession===a));
  $('compare-status').textContent=`${rows.length} of 3 records selected. Selections stay available when you change the record filters.`;
@@ -47,7 +47,7 @@ function renderRecords(){
  const pages=Math.max(1,Math.ceil(filtered.length/pageSize));
  page=Math.min(page,pages-1);const visible=filtered.slice(page*pageSize,(page+1)*pageSize);
  $('results-count').textContent=`${number(filtered.length)} matching records across ${number(distinct(filtered,'taxid'))} NCBI taxon IDs. Overview charts show the whole snapshot.`;
- $('record-rows').innerHTML=visible.map(r=>`<tr><td><i>${esc(r.name)}</i><small>${esc(r.family)} · ${esc(r.order)}</small><small><a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${encodeURIComponent(r.taxid)}" target="_blank" rel="noopener">Taxon ${esc(r.taxid)} ↗</a></small><label class="compare-choice"><input type="checkbox" data-compare="${esc(r.accession)}" ${selected.includes(r.accession)?'checked':''} ${selected.length>=3&&!selected.includes(r.accession)?'disabled':''} aria-label="Compare ${esc(r.name)} ${esc(r.accession)}">Compare</label></td><td><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/${encodeURIComponent(r.accession)}/" target="_blank" rel="noopener">${esc(r.accession)} ↗</a><small>${esc(r.submitter)}</small></td><td><span class="badge">${esc(r.level)}</span></td><td>${length(r.length)}<small>Scaffold N50 ${length(r.n50)}</small></td><td>${r.bioproject?`<a href="https://www.ncbi.nlm.nih.gov/bioproject/${encodeURIComponent(r.bioproject)}" target="_blank" rel="noopener">${esc(r.bioproject)} ↗</a>`:'Not supplied'}${r.review?`<small class="badge review">${esc(r.review)}</small>`:''}</td></tr>`).join('')||'<tr><td colspan="5">No records match these filters. Try another name or reset the filters.</td></tr>';
+ $('record-rows').innerHTML=visible.map(r=>`<tr><td><i>${esc(r.name)}</i><small>${esc(r.family)} · ${esc(r.order)}</small><small><a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=${encodeURIComponent(r.taxid)}" target="_blank" rel="noopener">Taxon ${esc(r.taxid)} ↗</a></small>${window.crustgpTaxonDetails?window.crustgpTaxonDetails(r):''}<label class="compare-choice"><input type="checkbox" data-compare="${esc(r.accession)}" ${selected.includes(r.accession)?'checked':''} ${selected.length>=3&&!selected.includes(r.accession)?'disabled':''} aria-label="Compare ${esc(r.name)} ${esc(r.accession)}">Compare</label></td><td><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/${encodeURIComponent(r.accession)}/" target="_blank" rel="noopener">${esc(r.accession)} ↗</a><small>${esc(r.submitter)}</small></td><td><span class="badge">${esc(r.level)}</span></td><td>${length(r.length)}<small>Scaffold N50 ${length(r.n50)}</small></td><td>${r.bioproject?`<a href="https://www.ncbi.nlm.nih.gov/bioproject/${encodeURIComponent(r.bioproject)}" target="_blank" rel="noopener">${esc(r.bioproject)} ↗</a>`:'Not supplied'}${r.review?`<small class="badge review">${esc(r.review)}</small>`:''}</td></tr>`).join('')||'<tr><td colspan="5">No records match these filters. Try another name or reset the filters.</td></tr>';
  $('page-count').textContent=filtered.length?`Page ${page+1} of ${pages} · ${page*pageSize+1}–${Math.min((page+1)*pageSize,filtered.length)} of ${number(filtered.length)}`:'No matching records';
  $('previous').disabled=page===0;$('next').disabled=page>=pages-1;$('download').disabled=!filtered.length;
 }
@@ -63,8 +63,8 @@ try{
  document.querySelector('.explorer-body').addEventListener('click',event=>{
  const action=event.target.closest('[data-drill-kind]');if(!action)return;
  const kind=action.dataset.drillKind,value=action.dataset.drillValue;
- if(kind==='class'&&action.dataset.drillCount==='0'){jumpToTab('gaps');document.querySelectorAll('.gap-card').forEach(card=>card.classList.remove('gap-highlight'));const card=$('gap-'+value);if(card){card.classList.add('gap-highlight');card.focus({preventScroll:true});}return;}
- $('search').value='';$('class-filter').value='';$('level-filter').value='';$('hide-short').checked=false;$('review-only').checked=false;updateOrders();$('order-filter').value='';
+ if(kind==='class'&&action.dataset.drillCount==='0'){jumpToTab('gaps');if($('source-order-details'))$('source-order-details').open=true;document.querySelectorAll('.gap-card').forEach(card=>card.classList.remove('gap-highlight'));const card=$('gap-'+value);if(card){card.classList.add('gap-highlight');card.focus({preventScroll:true});}return;}
+ coverageAccessions=null;if($('biodiversity-record-context'))$('biodiversity-record-context').hidden=true;$('search').value='';$('class-filter').value='';$('level-filter').value='';$('hide-short').checked=false;$('review-only').checked=false;updateOrders();$('order-filter').value='';
  if(kind==='class'){$('class-filter').value=value;updateOrders();}
  if(kind==='level')$('level-filter').value=value;
  if(kind==='family')$('search').value=value;
@@ -81,7 +81,13 @@ try{
  populate('class-filter',records.map(r=>r.class),'All classes');populate('level-filter',records.map(r=>r.level),'All levels');updateOrders();
  $('class-filter').addEventListener('change',()=>{updateOrders();applyFilters();});['order-filter','level-filter','hide-short','review-only'].forEach(id=>$(id).addEventListener('change',applyFilters));$('search').addEventListener('input',applyFilters);
  $('previous').addEventListener('click',()=>{page--;renderRecords();});$('next').addEventListener('click',()=>{page++;renderRecords();});
- $('reset').addEventListener('click',()=>{$('search').value='';$('class-filter').value='';$('level-filter').value='';$('hide-short').checked=false;$('review-only').checked=false;updateOrders();$('order-filter').value='';applyFilters();});
+ $('reset').addEventListener('click',()=>{coverageAccessions=null;if($('biodiversity-record-context'))$('biodiversity-record-context').hidden=true;$('search').value='';$('class-filter').value='';$('level-filter').value='';$('hide-short').checked=false;$('review-only').checked=false;updateOrders();$('order-filter').value='';applyFilters();});
  $('download').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([csvText(filtered)],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='CrustGP-filtered-records.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+ window.addEventListener('crustgp:records',event=>{
+ const {accessions,label}=event.detail;
+ $('reset').click();coverageAccessions=new Set(accessions);
+ $('biodiversity-record-context').hidden=false;$('biodiversity-record-context').textContent='WoRMS selection: '+label+'. Showing eligible matched assemblies. Reset filters to return to all records.';
+ applyFilters();jumpToTab('records');
+ });
  applyFilters();$('load-status').textContent='';
 }catch(error){$('load-status').className='error-message';$('load-status').textContent='The records could not load. Please reload this page, or download the source CSV from Data & Methods.';console.error(error);}

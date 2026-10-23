@@ -8,6 +8,11 @@ CSV downloads, and side-by-side comparison of up to three records. Overview
 charts link to the corresponding record searches. About includes background
 on crustacean biology and links to the published scientific sources.
 
+WoRMS exports provide accepted-species denominators for conservative coverage
+summaries, order-to-family drill-down, and a paginated family/genus gap finder.
+Species selections open their matched assembly records. GoaT links and a
+log-scaled genome-size plot provide a separate view of genomic metadata.
+
 ## Preview
 
 The release ZIP includes a prebuilt `dist/` folder. Open `dist/index.html`
@@ -41,7 +46,7 @@ and local links. The DOM fixture tests do not replace visual browser checks.
 | `src/styles/` | Brand styles and responsive layouts |
 | `src/assets/` | Displayed logo and silhouette artwork |
 | `src/js/` | Explorer logic and site interactions |
-| `data/source/` | Assembly inventory and provenance |
+| `data/source/` | Assembly inventory, normalized WoRMS exports, GoaT snapshot and provenance |
 | `scripts/` | Import, build, and link checks |
 | `tests/` | Data and explorer-state tests |
 | `.github/workflows/pages.yml` | Build and deployment workflow |
@@ -70,6 +75,39 @@ The Data & Methods page explains these definitions and the limits of the
 coverage summaries. A zero-record comparison group means no matching record
 in this input, not confirmed absence from all public repositories.
 
+### WoRMS matching
+
+The supplied October 21, 2026 exports contain 72,298 accepted species records
+and 10,717 accepted genus records. Recent/fossil flags are incomplete, so these
+are export totals rather than a verified census of living species. Original
+XLSX files are not distributed; normalized taxonomic fields and source SHA-256
+hashes are retained in `data/source/worms.json`.
+
+`scripts/biodiversity.py` matches full names case-insensitively and requires an
+exact family match and a unique candidate. It does not infer synonyms or trim
+strain/subspecies names. Flagged records are excluded from coverage. Each
+accepted AphiaID contributes once regardless of its number of assemblies.
+The initial result is 154 species with eligible records; 272 assembly records
+have a name match (including flagged records), and 138 remain unresolved.
+The downloadable `dist/data/taxonomy-matches.csv` records every accession's
+outcome. This lower-bound matching procedure does not establish assembly
+completeness or a comprehensive inventory of sequenced crustaceans.
+
+The genus headline uses the genus export. Family/genus gap groups are derived
+from the species export, with lineage context retained to avoid merging
+identical names. These two exports have different genus totals.
+
+### GoaT snapshot
+
+`data/source/goat.json` stores 262 species-rank taxa with direct `genome_size`
+summary provenance, retrieved October 23, 2026. Eleven have unresolved names.
+The query covers NCBI Pancrustacea and excludes every Hexapoda descendant.
+No inferred summaries are plotted. Direct aggregation does not establish an
+independent experimental measurement. Source methods are accessible through
+each GoaT record. These taxa are independent of the assembly snapshot and do
+not enter WoRMS coverage numerators. The chart uses genome size, not assembly
+length. The saved query, index, retrieval date, and response hash are retained.
+
 ## Update the inventory
 
 For a workbook with the same column names and first-sheet structure:
@@ -86,6 +124,22 @@ Verify the new totals independently and update the snapshot reconciliation
 assertions in the tests when the input changes. For direct CSV edits, retain
 the column headers and document the source change in the provenance file.
 
+## Refresh taxonomy or GoaT
+
+```sh
+python3 scripts/import_worms.py /path/to/species.xlsx /path/to/genera.xlsx
+python3 scripts/refresh_goat.py
+python3 scripts/build.py
+python3 scripts/check_site.py
+node --test tests/*.test.js
+```
+
+The importer currently expects the supplied WoRMS column names and first-sheet
+layout. Update its snapshot date when using a new export. The GoaT refresh
+requires internet access and deliberately refuses truncated API results.
+Recheck totals, matching outcomes, and the scope notes on Data & Methods when
+changing any input. Routine builds use the saved files and make no API calls.
+
 ## Publish
 
 See [Publish with GitHub Desktop](docs/GITHUB_DESKTOP.md). The workflow
@@ -98,5 +152,12 @@ Assembly resources belong to the researchers and institutions identified in
 their repository records. Inclusion does not imply that CrustGP generated
 the assembly. Cite the original assembly, BioProject, and associated paper
 when using a resource. Scientific background references are linked on About.
+
+Taxonomy: [WoRMS Editorial Board, World Register of Marine Species](https://www.marinespecies.org/),
+supplied export dated October 21, 2026. Genomic summaries:
+[Challis et al. (2023), Genomes on a Tree](https://doi.org/10.12688/wellcomeopenres.18658.1).
+The GoaT plot is drawn by CrustGP from exported summaries, rather than copied
+from GoaT's interface. Follow linked GoaT records and cite underlying data
+sources when reusing values.
 
 Project contact: [crustaceangenomics@gmail.com](mailto:crustaceangenomics@gmail.com)
