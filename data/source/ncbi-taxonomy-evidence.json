@@ -1,0 +1,546 @@
+{
+  "date": "2026-10-23",
+  "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=taxonomy&id=217955,217954,63726,1820382,370420&retmode=xml",
+  "records": [
+    {
+      "taxid": "217955",
+      "name": "Lepidurus apus apus",
+      "rank": "subspecies",
+      "authority": null,
+      "lineage": [
+        {
+          "taxid": "131567",
+          "name": "cellular organisms",
+          "rank": "cellular root"
+        },
+        {
+          "taxid": "2759",
+          "name": "Eukaryota",
+          "rank": "domain"
+        },
+        {
+          "taxid": "33154",
+          "name": "Opisthokonta",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33208",
+          "name": "Metazoa",
+          "rank": "kingdom"
+        },
+        {
+          "taxid": "6072",
+          "name": "Eumetazoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33213",
+          "name": "Bilateria",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33317",
+          "name": "Protostomia",
+          "rank": "clade"
+        },
+        {
+          "taxid": "1206794",
+          "name": "Ecdysozoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "88770",
+          "name": "Panarthropoda",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6656",
+          "name": "Arthropoda",
+          "rank": "phylum"
+        },
+        {
+          "taxid": "197563",
+          "name": "Mandibulata",
+          "rank": "clade"
+        },
+        {
+          "taxid": "197562",
+          "name": "Pancrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701028",
+          "name": "Altocrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701030",
+          "name": "Allotriocarida",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6658",
+          "name": "Branchiopoda",
+          "rank": "class"
+        },
+        {
+          "taxid": "116557",
+          "name": "Phyllopoda",
+          "rank": "subclass"
+        },
+        {
+          "taxid": "58774",
+          "name": "Notostraca",
+          "rank": "order"
+        },
+        {
+          "taxid": "63729",
+          "name": "Triopsidae",
+          "rank": "family"
+        },
+        {
+          "taxid": "63724",
+          "name": "Lepidurus",
+          "rank": "genus"
+        },
+        {
+          "taxid": "202082",
+          "name": "Lepidurus apus",
+          "rank": "species"
+        }
+      ]
+    },
+    {
+      "taxid": "217954",
+      "name": "Lepidurus apus lubbocki",
+      "rank": "subspecies",
+      "authority": null,
+      "lineage": [
+        {
+          "taxid": "131567",
+          "name": "cellular organisms",
+          "rank": "cellular root"
+        },
+        {
+          "taxid": "2759",
+          "name": "Eukaryota",
+          "rank": "domain"
+        },
+        {
+          "taxid": "33154",
+          "name": "Opisthokonta",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33208",
+          "name": "Metazoa",
+          "rank": "kingdom"
+        },
+        {
+          "taxid": "6072",
+          "name": "Eumetazoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33213",
+          "name": "Bilateria",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33317",
+          "name": "Protostomia",
+          "rank": "clade"
+        },
+        {
+          "taxid": "1206794",
+          "name": "Ecdysozoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "88770",
+          "name": "Panarthropoda",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6656",
+          "name": "Arthropoda",
+          "rank": "phylum"
+        },
+        {
+          "taxid": "197563",
+          "name": "Mandibulata",
+          "rank": "clade"
+        },
+        {
+          "taxid": "197562",
+          "name": "Pancrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701028",
+          "name": "Altocrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701030",
+          "name": "Allotriocarida",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6658",
+          "name": "Branchiopoda",
+          "rank": "class"
+        },
+        {
+          "taxid": "116557",
+          "name": "Phyllopoda",
+          "rank": "subclass"
+        },
+        {
+          "taxid": "58774",
+          "name": "Notostraca",
+          "rank": "order"
+        },
+        {
+          "taxid": "63729",
+          "name": "Triopsidae",
+          "rank": "family"
+        },
+        {
+          "taxid": "63724",
+          "name": "Lepidurus",
+          "rank": "genus"
+        },
+        {
+          "taxid": "202082",
+          "name": "Lepidurus apus",
+          "rank": "species"
+        }
+      ]
+    },
+    {
+      "taxid": "63726",
+      "name": "Lepidurus couesii",
+      "rank": "species",
+      "authority": null,
+      "lineage": [
+        {
+          "taxid": "131567",
+          "name": "cellular organisms",
+          "rank": "cellular root"
+        },
+        {
+          "taxid": "2759",
+          "name": "Eukaryota",
+          "rank": "domain"
+        },
+        {
+          "taxid": "33154",
+          "name": "Opisthokonta",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33208",
+          "name": "Metazoa",
+          "rank": "kingdom"
+        },
+        {
+          "taxid": "6072",
+          "name": "Eumetazoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33213",
+          "name": "Bilateria",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33317",
+          "name": "Protostomia",
+          "rank": "clade"
+        },
+        {
+          "taxid": "1206794",
+          "name": "Ecdysozoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "88770",
+          "name": "Panarthropoda",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6656",
+          "name": "Arthropoda",
+          "rank": "phylum"
+        },
+        {
+          "taxid": "197563",
+          "name": "Mandibulata",
+          "rank": "clade"
+        },
+        {
+          "taxid": "197562",
+          "name": "Pancrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701028",
+          "name": "Altocrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701030",
+          "name": "Allotriocarida",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6658",
+          "name": "Branchiopoda",
+          "rank": "class"
+        },
+        {
+          "taxid": "116557",
+          "name": "Phyllopoda",
+          "rank": "subclass"
+        },
+        {
+          "taxid": "58774",
+          "name": "Notostraca",
+          "rank": "order"
+        },
+        {
+          "taxid": "63729",
+          "name": "Triopsidae",
+          "rank": "family"
+        },
+        {
+          "taxid": "63724",
+          "name": "Lepidurus",
+          "rank": "genus"
+        }
+      ]
+    },
+    {
+      "taxid": "1820382",
+      "name": "Daphnia sinensis",
+      "rank": "species",
+      "authority": null,
+      "lineage": [
+        {
+          "taxid": "131567",
+          "name": "cellular organisms",
+          "rank": "cellular root"
+        },
+        {
+          "taxid": "2759",
+          "name": "Eukaryota",
+          "rank": "domain"
+        },
+        {
+          "taxid": "33154",
+          "name": "Opisthokonta",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33208",
+          "name": "Metazoa",
+          "rank": "kingdom"
+        },
+        {
+          "taxid": "6072",
+          "name": "Eumetazoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33213",
+          "name": "Bilateria",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33317",
+          "name": "Protostomia",
+          "rank": "clade"
+        },
+        {
+          "taxid": "1206794",
+          "name": "Ecdysozoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "88770",
+          "name": "Panarthropoda",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6656",
+          "name": "Arthropoda",
+          "rank": "phylum"
+        },
+        {
+          "taxid": "197563",
+          "name": "Mandibulata",
+          "rank": "clade"
+        },
+        {
+          "taxid": "197562",
+          "name": "Pancrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701028",
+          "name": "Altocrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701030",
+          "name": "Allotriocarida",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6658",
+          "name": "Branchiopoda",
+          "rank": "class"
+        },
+        {
+          "taxid": "116557",
+          "name": "Phyllopoda",
+          "rank": "subclass"
+        },
+        {
+          "taxid": "84337",
+          "name": "Diplostraca",
+          "rank": "order"
+        },
+        {
+          "taxid": "6665",
+          "name": "Cladocera",
+          "rank": "suborder"
+        },
+        {
+          "taxid": "116561",
+          "name": "Anomopoda",
+          "rank": "infraorder"
+        },
+        {
+          "taxid": "77658",
+          "name": "Daphniidae",
+          "rank": "family"
+        },
+        {
+          "taxid": "6668",
+          "name": "Daphnia",
+          "rank": "genus"
+        },
+        {
+          "taxid": "575215",
+          "name": "Daphnia similis group",
+          "rank": "species group"
+        }
+      ]
+    },
+    {
+      "taxid": "370420",
+      "name": "Triops simplex",
+      "rank": "species",
+      "authority": null,
+      "lineage": [
+        {
+          "taxid": "131567",
+          "name": "cellular organisms",
+          "rank": "cellular root"
+        },
+        {
+          "taxid": "2759",
+          "name": "Eukaryota",
+          "rank": "domain"
+        },
+        {
+          "taxid": "33154",
+          "name": "Opisthokonta",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33208",
+          "name": "Metazoa",
+          "rank": "kingdom"
+        },
+        {
+          "taxid": "6072",
+          "name": "Eumetazoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33213",
+          "name": "Bilateria",
+          "rank": "clade"
+        },
+        {
+          "taxid": "33317",
+          "name": "Protostomia",
+          "rank": "clade"
+        },
+        {
+          "taxid": "1206794",
+          "name": "Ecdysozoa",
+          "rank": "clade"
+        },
+        {
+          "taxid": "88770",
+          "name": "Panarthropoda",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6656",
+          "name": "Arthropoda",
+          "rank": "phylum"
+        },
+        {
+          "taxid": "197563",
+          "name": "Mandibulata",
+          "rank": "clade"
+        },
+        {
+          "taxid": "197562",
+          "name": "Pancrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701028",
+          "name": "Altocrustacea",
+          "rank": "clade"
+        },
+        {
+          "taxid": "3701030",
+          "name": "Allotriocarida",
+          "rank": "clade"
+        },
+        {
+          "taxid": "6658",
+          "name": "Branchiopoda",
+          "rank": "class"
+        },
+        {
+          "taxid": "116557",
+          "name": "Phyllopoda",
+          "rank": "subclass"
+        },
+        {
+          "taxid": "58774",
+          "name": "Notostraca",
+          "rank": "order"
+        },
+        {
+          "taxid": "63729",
+          "name": "Triopsidae",
+          "rank": "family"
+        },
+        {
+          "taxid": "58776",
+          "name": "Triops",
+          "rank": "genus"
+        }
+      ]
+    }
+  ]
+}

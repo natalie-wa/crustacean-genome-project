@@ -17,7 +17,7 @@ def build():
         for k in ['length','n50','contigN50']: r[k] = int(float(r[k])) if r[k] else None
         for k in ['gc','busco']: r[k] = float(r[k]) if r[k] else None
     (OUT/'data').mkdir()
-    prepare(ROOT, OUT, records)
+    taxonomy_summary=prepare(ROOT, OUT, records)
     (OUT/'data/assemblies.json').write_text(json.dumps(records, ensure_ascii=False))
     (OUT/'data/assemblies.js').write_text('window.CRUSTGP_RECORDS = '+json.dumps(records,ensure_ascii=False)+';\n')
     shutil.copy(ROOT/'data/source/assemblies.csv', OUT/'data/assemblies.csv')
@@ -29,6 +29,7 @@ def build():
     (OUT/'js/explorer.bundle.js').write_text('(async () => {\n'+model+'\n'+explorer+'\n})();\n')
     for page in (ROOT/'src/pages').glob('*.html'):
         html = page.read_text()
+        html=html.replace('{{matched_species}}',str(taxonomy_summary['eligibleSpecies'])).replace('{{families_reached}}',str(taxonomy_summary['eligibleFamilies']))
         for component in ['nav','footer']:
             html=html.replace('{{'+component+'}}',(ROOT/f'src/components/{component}.html').read_text())
         (OUT/page.name).write_text(html)

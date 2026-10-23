@@ -75,9 +75,9 @@ test('chart navigation opens matching records and keyboard navigation switches v
 test('biodiversity panels initialize, paginate and link species selections to exact assembly accessions',()=>{
  const app=fixture('',true),d=app.window.CRUSTGP_BIODIVERSITY;
  assert.ok(app.ids.get('biodiversity-summary').innerHTML.includes('72,298'));
- assert.ok(app.ids.get('biodiversity-summary').innerHTML.includes('154'));
+ assert.ok(app.ids.get('biodiversity-summary').innerHTML.includes('184'));
  assert.ok(app.ids.get('goat-count').textContent.startsWith('262 species-level taxa'));
- assert.equal(app.ids.get('coverage-rows').innerHTML.match(/<tr>/g).length,8);
+ assert.equal(app.ids.get('coverage-rows').innerHTML.match(/class="coverage-card /g).length,6);
  app.ids.get('coverage-next').click();assert.ok(app.ids.get('coverage-page').textContent.includes('Page 2'));
  app.ids.get('gap-search').value='Daphniidae';app.ids.get('gap-search').listeners.input();
  assert.ok(app.ids.get('gap-results').innerHTML.includes('Daphniidae'));
@@ -101,4 +101,31 @@ test('coverage numerators deduplicate accepted species and never include flagged
  assert.equal(new Set(d.goat.rows.map(r=>r.taxid)).size,262);
  assert.ok(d.goat.rows.every(r=>r.source==='direct'&&r.bp>0));
  assert.ok(!d.goat.rows.some(r=>['Insecta','Entognatha','Collembola'].includes(r.class)));
+});
+test('paired chart conserves both totals and family reach excludes unassigned families',()=>{
+ const app=fixture('',true),d=app.window.CRUSTGP_BIODIVERSITY,html=app.ids.get('diversity-chart').innerHTML;
+ const counts=[...html.matchAll(/data-species-count="(\d+)" data-matched-count="(\d+)"/g)];
+ assert.equal(counts.length,6);
+ assert.equal(counts.reduce((n,r)=>n+Number(r[1]),0),d.species.length);
+ assert.equal(counts.reduce((n,r)=>n+Number(r[2]),0),d.eligibleSpecies);
+ const familyKeys=new Set(),reached=new Set();
+ for(const s of d.species){const g=d.groups[s[2]];if(!g[2])continue;const key=JSON.stringify(g);familyKeys.add(key);if(s[4].length)reached.add(key);}
+ assert.ok(app.ids.get('family-reach').innerHTML.includes(`${reached.size} of 1,139 named families`));
+ assert.equal(familyKeys.size,1139);
+ app.ids.get('reach-gaps').click();assert.deepEqual(app.visible(),['gaps']);assert.equal(app.ids.get('gap-empty').checked,true);
+ assert.ok(!app.ids.get('gap-results').innerHTML.includes('Unassigned family'));
+});
+test('order cards separate gaps from represented groups and class figures open the matching view',()=>{
+ const app=fixture('',true);
+ assert.ok(!app.ids.get('coverage-rows').innerHTML.includes('No matched records'));
+ app.ids.get('coverage-status').value='empty';app.ids.get('coverage-status').listeners.change();
+ assert.ok(app.ids.get('coverage-rows').innerHTML.includes('No matched records'));
+ assert.ok(!app.ids.get('coverage-rows').innerHTML.includes('0.00%'));
+ app.ids.get('diversity-chart').listeners.click({target:{closest:()=>({dataset:{storyClass:'Remipedia'}})}});
+ assert.deepEqual(app.visible(),['gaps']);assert.equal(app.ids.get('coverage-class').value,'Remipedia');
+ assert.ok(app.ids.get('coverage-rows').innerHTML.includes('Nectiopoda'));
+ assert.ok(app.ids.get('coverage-rows').innerHTML.includes('No matched records'));
+ const rows=app.ids.get('largest-gaps').innerHTML;
+ assert.equal([...rows.matchAll(/data-largest-gap=/g)].length,6);
+ assert.ok(rows.includes('Alpheidae'));
 });

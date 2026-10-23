@@ -10,6 +10,11 @@ on crustacean biology and links to the published scientific sources.
 
 WoRMS exports provide accepted-species denominators for conservative coverage
 summaries, order-to-family drill-down, and a paginated family/genus gap finder.
+The overview compares group shares of diversity and matched species, and shows
+family reach. Coverage & Gaps highlights the six richest named families without
+matches, followed by searchable order/family cards. Species lists open in a
+keyboard-accessible dialog so exploration does not extend the page. Additional
+assembly summaries remain available in an expandable section.
 Species selections open their matched assembly records. GoaT links and a
 log-scaled genome-size plot provide a separate view of genomic metadata.
 
@@ -53,7 +58,8 @@ and local links. The DOM fixture tests do not replace visual browser checks.
 | `docs/GITHUB_DESKTOP.md` | Fresh-repository publishing instructions |
 
 Edit the files under `src/`, not the generated `dist/` files. Shared brand
-styles are in `src/styles/base.css`. Reading sizes and contrast adjustments
+styles are in `src/styles/base.css`. Summary figures, coverage cards and
+the species dialog are styled in `src/styles/figures.css`. Reading sizes and contrast adjustments
 are in `src/styles/readability.css`.
 
 ## Data scope
@@ -83,15 +89,27 @@ are export totals rather than a verified census of living species. Original
 XLSX files are not distributed; normalized taxonomic fields and source SHA-256
 hashes are retained in `data/source/worms.json`.
 
-`scripts/biodiversity.py` matches full names case-insensitively and requires an
-exact family match and a unique candidate. It does not infer synonyms or trim
-strain/subspecies names. Flagged records are excluded from coverage. Each
-accepted AphiaID contributes once regardless of its number of assemblies.
-The initial result is 154 species with eligible records; 272 assembly records
-have a name match (including flagged records), and 138 remain unresolved.
-The downloadable `dist/data/taxonomy-matches.csv` records every accession's
-outcome. This lower-bound matching procedure does not establish assembly
-completeness or a comprehensive inventory of sequenced crustaceans.
+`scripts/taxonomy.py` reconciles full scientific names and unique subgenus-normalized
+names, with higher-class agreement. Family changes require WoRMS accepted-ID
+evidence. Synonyms and alternative representations use recorded exact-name API
+results or explicit NCBI cross-references. No fuzzy spelling suggestions are
+accepted. Subspecies roll-ups require recorded NCBI species ancestry confirmed
+by WoRMS, without conflicting WoRMS evidence. Accepted species targets must occur
+in the supplied species export to enter the coverage denominator.
+
+The corrected snapshot maps 350 assembly records to 188 accepted species IDs;
+184 have eligible unflagged assembly records. The remaining categories are 26
+records with unidentified taxa, 15 WoRMS-resolved records outside the species
+export, and 19 records across three names awaiting a verified reference match.
+Each accession's category, matching method, accepted target, coverage eligibility,
+source review flag, and evidence links are in `dist/data/taxonomy-matches.csv`.
+`dist/data/taxonomy-summary.json` reconciles the categories to all 410 records.
+
+The saved `*evidence.json` files contain dated WoRMS service responses and the
+NCBI lineage evidence used in reconciliation. Routine builds are offline. These
+responses cover the reviewed input; new names without sufficient evidence stay
+outside coverage until evidence is added. Original names and family labels are
+preserved. See `docs/TAXONOMY_RECONCILIATION.md` for the review results.
 
 The genus headline uses the genus export. Family/genus gap groups are derived
 from the species export, with lineage context retained to avoid merging
